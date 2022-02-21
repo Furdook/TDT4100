@@ -5,4 +5,5 @@ module project {
 
     opens project to javafx.fxml;
     exports project;
+    exports project.modules to javafx.graphics;
 }

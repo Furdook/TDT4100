@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -14,12 +13,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("App"));
-        scene.setFill(Color.TRANSPARENT); // Sets top bar as matching colour to background (GUI only macOS 12)
+        scene = new Scene(loadFXML("Movies"));
 
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("App");
+        stage.setTitle("Cinema!");
         stage.show();
     }
 
