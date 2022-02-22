@@ -25,16 +25,16 @@ public class Theatre {
         else throw new IllegalArgumentException("Theatre is not available");
     }
 
-    public String getName() {
-        return this.theatreName;
+    private boolean getAvailability(int start, int length) { 
+        if (this.time.contains(start) && this.time.contains(start+length)) return true;
+        else return false;
     }
-    
+
     public List<Seats> getSeatList() { 
         return this.seats;
     }
 
-    private boolean getAvailability(int start, int length) { 
-        if (this.time.contains(start) && this.time.contains(start+length)) return true;
-        else return false;
+    public String getName() {
+        return this.theatreName;
     }
 }

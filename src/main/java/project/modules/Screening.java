@@ -25,12 +25,12 @@ public class Screening { // Remember to remove screening when theatre is full !!
         }
     }
 
-    public Movie getMovie() {
-        return this.movie;
-    }
-
     public List<Seats> getSeats() { 
         return this.seating;
+    }
+
+    public Movie getMovie() {
+        return this.movie;
     }
 
     @Override

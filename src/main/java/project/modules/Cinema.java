@@ -37,16 +37,6 @@ public class Cinema {
         Screening screening14 = new Screening(movie4, 350, sal2);
         Screening screening15 = new Screening(movie4, 115, sal3);
         Screening screening16 = new Screening(movie4, 0, sal4);
-
-        Ticket ticket = new Ticket();
-        ticket.setName(true, "John");
-        ticket.setName(false, "Smith");
-        ticket.setScreening(screening1);
-
-        ticket.setSeating(3);
-
-        System.out.println(ticket.getSeats());
-        System.out.println(screening1.getMovie().getTitle());
     }
 }
 
