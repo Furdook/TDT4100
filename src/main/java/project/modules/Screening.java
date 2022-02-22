@@ -9,29 +9,32 @@ public class Screening { // Remember to remove screening when theatre is full !!
     private Theatre theatre;
 
     public Screening(Movie movie, int start, Theatre theatre) {
-        for (Seats seats : theatre.getSeatList()) {
-            this.seating.add(seats);
+        for (Seats seat : theatre.getSeatList()) {
+            this.seating.add(seat);
         }
+
+        theatre.setTaken(start, movie.getLength());
+
         this.theatre = theatre;
         this.movie = movie;
     }
 
-    public void removeSeat(int from, int to) {
-        for (int i = from; i < to; i++) {
+    public void removeSeat(int amount) {
+        for (int i = 0; i < amount; i++) {
             this.seating.remove(i);
         }
-    }
-
-    public int getAvailableSeats() {
-        return this.seating.size();
     }
 
     public Movie getMovie() {
         return this.movie;
     }
 
+    public List<Seats> getSeats() { 
+        return this.seating;
+    }
+
     @Override
     public String toString() {
-        return this.movie.getTitle() + " shwowing for " + this.movie.getScreenTime() + " minutes, in theatre " + this.theatre.getName();
+        return this.movie.getTitle() + " , in theatre " + this.theatre.getName();
     }
 }

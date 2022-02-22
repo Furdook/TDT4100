@@ -19,7 +19,7 @@ public class Movie {
         return this.language;
     }
 
-    public int getScreenTime() {
+    public int getLength() {
         return this.length;
     }
 }

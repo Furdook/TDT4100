@@ -6,22 +6,23 @@ public class Ticket {
     private String firstName;
     private String lastName;
     private List<Seats> seats;
-    private String seating;
+    private String seating; // seats in readable string format
     private Screening screening;
     
-    public Ticket(String firstName, String lastName, int seats, Screening screening) {
-
-    }
-
     public Ticket() {}
 
     public void setName(boolean a, String name) {
-        if (name != null && !name.equals("")) name = a ? this.firstName : this.lastName; 
+        if (name != null && !name.equals("")){
+            if (a) this.firstName = name;
+            else this.lastName = name;
+        }
         else throw new IllegalArgumentException("Name can not be null");
     }
 
-    public void setSeating(int from, int to) {
+    public void setSeating(int amount) {
+        for (int i = 0; i < amount; i++) {
 
+        }
     }
 
     public void setScreening(Screening screening) {
