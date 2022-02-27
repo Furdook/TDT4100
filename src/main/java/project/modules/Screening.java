@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Screening { // Remember to remove screening when theatre is full !!!
-    public List<Seats> seating = new ArrayList<>();
+    public List<String> seating = new ArrayList<>();
     private Movie movie;
     private Theatre theatre;
 
     public Screening(Movie movie, int start, Theatre theatre) {
-        for (Seats seat : theatre.getSeatList()) {
-            this.seating.add(seat);
-        }
+        this.seating = theatre.getSeatList();
 
         theatre.setTaken(start, movie.getLength());
 
@@ -25,7 +23,7 @@ public class Screening { // Remember to remove screening when theatre is full !!
         }
     }
 
-    public List<Seats> getSeats() { 
+    public List<String> getSeats() { 
         return this.seating;
     }
 
