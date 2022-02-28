@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Screening { // Remember to remove screening when theatre is full !!!
-    public List<String> seating = new ArrayList<>();
+    private List<String> seating = new ArrayList<>();
+    private List<String> temp = new ArrayList<>();
     private Movie movie;
     private Theatre theatre;
 
@@ -17,10 +18,10 @@ public class Screening { // Remember to remove screening when theatre is full !!
         this.movie = movie;
     }
 
-    public void removeSeat(int amount) {
-        for (int i = 0; i < amount; i++) {
-            this.seating.remove(i);
-        }
+    public List<String> setSeats(int a) {
+        this.temp.addAll(this.seating.subList(0, a));
+        this.seating.subList(0, a).clear();
+        return this.temp;
     }
 
     public List<String> getSeats() { 
@@ -33,6 +34,6 @@ public class Screening { // Remember to remove screening when theatre is full !!
 
     @Override
     public String toString() {
-        return this.movie.getTitle() + " , in theatre " + this.theatre.getName();
+        return this.movie.getTitle() + ", in theatre " + this.theatre.getName();
     }
 }

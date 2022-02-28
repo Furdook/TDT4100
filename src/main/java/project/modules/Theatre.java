@@ -23,21 +23,20 @@ public class Theatre {
         else throw new IllegalArgumentException("Theatre can not have zero or fewer seats, and no more than 110");
 
         for (int i = 0; i < 50; i++) { // Sets time the cinema would be open 1 = 15 minutes
-            this.time.add(i); // Creates timeArray used for timing screenings in said theatre
+            this.time.add(i); // Creates timeArray used for timing screenings in this theatre
         }
     }
 
     public void setTaken(int start, int length) {
-        if (getAvailability(start, length)) {
+        if (start < 0) throw new IllegalArgumentException("The movie can not start before opening time"); // Not neccesary as Java will throw null error?
+        if (getAvailability(start, length)) { // Removes time slots from the time List in 15 minute increments
             this.time.subList(this.time.indexOf(start), this.time.indexOf(start+length)).clear();
-        } // Removes time slots from the time List in 15 minute increments
+        } 
         else throw new IllegalArgumentException("Theatre is not available");
     }
 
     private boolean getAvailability(int start, int length) { // Cheacks if timeslots are taken
-        if (this.time.contains(start) && this.time.contains(start+length)) {
-            return true;
-        }
+        if (this.time.contains(start) && this.time.contains(start+length)) return true;
         else return false;
     }
 
@@ -47,10 +46,5 @@ public class Theatre {
 
     public String getName() {
         return this.theatreName;
-    }
-
-    public static void main(String[] args) {
-        Theatre test = new Theatre("test", 110);
-        System.out.println(test.getSeatList());
     }
 }
