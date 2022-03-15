@@ -1,9 +1,13 @@
 package project.modules;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movie {
     private int length;
     private String title;
     private String language;
+    private static List<Screening> screenings = new ArrayList<>();
 
     public Movie(String title, String language, int length) {
         if (title != null && !title.equals("")) this.title = title;
@@ -26,5 +30,13 @@ public class Movie {
 
     public int getLength() {
         return this.length;
+    }
+
+    public void setScreenings(Screening screening) {
+        screenings.add(screening);
+    }
+
+    public static String getScreening(int index) {
+        return screenings.get(index).toString();
     }
 }

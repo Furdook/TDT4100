@@ -16,6 +16,8 @@ public class Screening { // Remember to remove screening when theatre is full !!
 
         this.theatre = theatre;
         this.movie = movie;
+
+        movie.setScreenings(this); // maybe
     }
 
     public List<String> setSeats(int a) {
