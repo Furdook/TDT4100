@@ -1,24 +1,15 @@
 package project.modules;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
+
 
 // Will be replaces by text file
 public class Cinema {
-    private static int OPEN = 800; // change to 15 minute increments later
 
-    private static Theatre sal1 = new Theatre("Sal 1", 90);
-    private static Movie movie1 = new Movie("The Imitation Game", "Engelsk", 8);
-    
-    public static Screening screening1 = new Screening(movie1, 0, sal1);
+    private static String[] test2;
+    private static int OPEN = 800; // change to 15 minute increments later
 
     public static int getOPEN() {
         return OPEN;
@@ -26,28 +17,64 @@ public class Cinema {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        List<Movie> movies = new ArrayList<>();
-        System.out.println(movies);
-
-        File file = new File("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/cinema.txt");
-        InputStreamReader isr = new InputStreamReader(new FileInputStream(file));
-
-        try (BufferedReader br = new BufferedReader(isr)) {
-            while (br.ready()) {
-                String line = br.readLine();
-                System.out.println(line);
-            }
-        } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
         try {
-            movies = Files.lines(Paths.get(file.toURI())).skip(1).map(s-> new Movie(file.lines().findFirst().get().split(";")).toList());
-        } catch (Exception e) {
-            //TODO: handle exception
-        }
+            Scanner test = new Scanner(new File("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/cinema.txt"));
+            test.useDelimiter("\n");
 
+            while (test.hasNext()) {
+               String string = test.next();
+               test2 = string.split(";");
+               createObjects(test2);
+            }
+            test.close();
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public static void createObjects(String[] string) {
+        if (check("theatre")) {
+            new Theatre(string[1], Integer.parseInt(string[2]));
+        }
+        else if (check("movie")) {
+            new Movie(string[1], string[2], Integer.parseInt(string[3]));
+        }
+        else if (check("screening")) {
+            new Screening(Movie.getMovie(getTitle(string[1])), Integer.parseInt(string[2]), Theatre.getTheatre(getTheatreTitle(string[3])));
+        }
+    }
+
+    public static String getTheatreTitle(String string) {
+        switch (string) {
+            case "theatre1":
+                return "Sal 1";
+            case "theatre2":
+                return "Sal 2";
+            case "theatre3":
+                return "Sal 3";
+            case "theatre4":
+                return "Sal 4";
+            default:
+                return null;
+        }
+    }
+
+    public static String getTitle(String string) {
+        switch (string) {
+            case "movie1":
+                return "The Imitation Game";
+            case "movie2":
+                return "Snowden";
+            case "movie3":
+                return "Ex Machina";
+            case "movie4":
+                return "I, Robot";
+            default:
+                return null;
+        }
+    }
+
+    public static boolean check(String cont) {
+        if (test2[0].contains(cont)) return true;
+        else return false;
     }
 }
 

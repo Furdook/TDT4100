@@ -2,11 +2,13 @@ package project.modules;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Movie {
     private int length;
     private String title;
     private String language;
+    private static List<Movie> movies = new ArrayList<>();
     private static List<Screening> screenings = new ArrayList<>();
 
     public Movie(String title, String language, int length) {
@@ -18,6 +20,15 @@ public class Movie {
 
         if (length > 0) this.length = length;
         else throw new IllegalArgumentException("Length can not be less than zero");
+
+        movies.add(this);
+
+    }
+
+    public static Movie getMovie(String input) {
+        Optional<Movie> tmp = movies.stream().filter(p -> p.getTitle().equals(input)).findFirst();
+        Movie test = tmp.get();
+        return test;
     }
 
     public String getTitle() {

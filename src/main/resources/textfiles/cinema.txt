@@ -1,35 +1,24 @@
-id;theatreName;size
-theatre1;Sal1;90
-theatre1;Sal2;80
-theatre1;Sal3;110
-theatre1;Sal4;50
-
-
-
-id;title;language;length
+theatre1;Sal 1;90;null
+theatre2;Sal 2;80;null
+theatre3;Sal 3;110;null
+theatre4;Sal 4;50;null
 movie1;The Imitation Game;English;8
 movie2;Snowden;English;9
 movie3;Ex Machina;English;8
 movie4;I, Robot;English;8
-
-
-
-
-
-id;film;time;theatre
-screening1;movie1;0;sal1
-screening2;movie1;35;sal2
-screening3;movie1;20;sal3
-screening4;movie1;15;sal4
-screening5;movie2;10;sal1
-screening6;movie2;0;sal2
-screening7;movie2;35;sal3
-screening8;movie2;30;sal4
-screening9;movie3;20;sal1
-screening10;movie3;10;sal2
-screening11;movie3;0;sal3
-screening12;movie3;40;sal4
-screening13;movie4;40;sal1
-screening14;movie4;25;sal2
-screening15;movie4;10;sal3
-screening16;movie4;0;sal4
+screening1;movie1;0;theatre1
+screening2;movie1;35;theatre2
+screening3;movie1;20;theatre3
+screening4;movie1;15;theatre4
+screening5;movie2;10;theatre1
+screening6;movie2;0;theatre2
+screening7;movie2;35;theatre3
+screening8;movie2;30;theatre4
+screening9;movie3;20;theatre1
+screening10;movie3;10;theatre2
+screening11;movie3;0;theatre3
+screening12;movie3;40;theatre4
+screening13;movie4;40;theatre1
+screening14;movie4;25;theatre2
+screening15;movie4;10;theatre3
+screening16;movie4;0;theatre4

@@ -2,11 +2,13 @@ package project.modules;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Theatre {
     private String theatreName;
     private List<String> seats = new ArrayList<>();
     private List<Integer> time = new ArrayList<>();
+    private static List<Theatre> theatres = new ArrayList<>();
     private char[] seatChar = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'};
 
     public Theatre(String name, int size) {
@@ -25,6 +27,13 @@ public class Theatre {
         for (int i = 0; i < 50; i++) { // Sets time the cinema would be open 1 = 15 minutes
             this.time.add(i); // Creates timeArray used for timing screenings in this theatre
         }
+        theatres.add(this);
+    }
+
+    public static Theatre getTheatre(String input) {
+        Optional<Theatre> tmp = theatres.stream().filter(p -> p.getName().equals(input)).findFirst();
+        Theatre test = tmp.get();
+        return test;
     }
 
     public void setTaken(int start, int length) {
