@@ -1,4 +1,16 @@
 package project.modules;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 // Will be replaces by text file
 public class Cinema {
     private static int OPEN = 800; // change to 15 minute increments later
@@ -12,36 +24,30 @@ public class Cinema {
         return OPEN;
     }
 
-    public static void main(String[] args) {
-        //Theatre sal1 = new Theatre("Sal 1", 90);
-        Theatre sal2 = new Theatre("Sal 2", 80);
-        Theatre sal3 = new Theatre("Sal 3", 110);
-        Theatre sal4 = new Theatre("Sal 4", 50);
+    public static void main(String[] args) throws FileNotFoundException {
 
-       // Movie movie1 = new Movie("The Imitation Game", "Engelsk", 114);
-        Movie movie2 = new Movie("Snowden", "Engelsk", 9);
-        Movie movie3 = new Movie("Ex Machina", "Engelsk", 8);
-        Movie movie4 = new Movie("I, Robot", "Engelsk", 8);
+        List<Movie> movies = new ArrayList<>();
+        System.out.println(movies);
 
-       // Screening screening1 = new Screening(movie1, 0, sal1);
-        Screening screening2 = new Screening(movie1, 35, sal2);
-        Screening screening3 = new Screening(movie1, 20, sal3);
-        Screening screening4 = new Screening(movie1, 15, sal4); 
+        File file = new File("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/cinema.txt");
+        InputStreamReader isr = new InputStreamReader(new FileInputStream(file));
 
-        Screening screening5 = new Screening(movie2, 10, sal1);
-        Screening screening6 = new Screening(movie2, 0, sal2);
-        Screening screening7 = new Screening(movie2, 35, sal3);
-        Screening screening8 = new Screening(movie2, 30, sal4);
+        try (BufferedReader br = new BufferedReader(isr)) {
+            while (br.ready()) {
+                String line = br.readLine();
+                System.out.println(line);
+            }
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        Screening screening9 = new Screening(movie3, 20, sal1);
-        Screening screening10 = new Screening(movie3, 10, sal2);
-        Screening screening11 = new Screening(movie3, 0, sal3);
-        Screening screening12 = new Screening(movie3, 40, sal4);
+        try {
+            movies = Files.lines(Paths.get(file.toURI())).skip(1).map(s-> new Movie(file.lines().findFirst().get().split(";")).toList());
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
 
-        Screening screening13 = new Screening(movie4, 40, sal1);
-        Screening screening14 = new Screening(movie4, 25, sal2);
-        Screening screening15 = new Screening(movie4, 10, sal3);
-        Screening screening16 = new Screening(movie4, 0, sal4);
     }
 }
 
