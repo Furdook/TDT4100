@@ -24,12 +24,10 @@ public class Theatre {
         }
         else throw new IllegalArgumentException("Theatre can not have zero or fewer seats, and no more than 110");
 
-        for (int i = 0; i < 50; i++) { // Sets time the cinema would be open 1 = 15 minutes
+        for (int i = 0; i < 50; i++) { // Sets time the cinema would be open 1 = 15 minutes, 0 = 12:00
             this.time.add(i); // Creates timeArray used for timing screenings in this theatre
         }
         theatres.add(this);
-
-        System.out.println("Theatre: " + this.theatreName  + ", ID: " + this);
     }
 
     public static Theatre getTheatre(String input) {

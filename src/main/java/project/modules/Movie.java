@@ -9,7 +9,7 @@ public class Movie {
     private String title;
     private String language;
     private static List<Movie> movies = new ArrayList<>();
-    private static List<Screening> screenings = new ArrayList<>();
+    private List<Screening> screenings = new ArrayList<>();
 
     public Movie(String title, String language, int length) {
         if (title != null && !title.equals("")) this.title = title;
@@ -22,9 +22,6 @@ public class Movie {
         else throw new IllegalArgumentException("Length can not be less than zero");
 
         movies.add(this);
-
-        System.out.println("Movie: " + this.title + ", ID: " + this);
-
     }
 
     public static Movie getMovie(String input) {
@@ -53,7 +50,7 @@ public class Movie {
         screenings.add(screening);
     }
 
-    public static List<Screening> getScreenings() {
-        return screenings;
+    public List<Screening> getScreenings() {
+        return this.screenings;
     }
 }

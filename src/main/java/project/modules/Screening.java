@@ -6,6 +6,7 @@ import java.util.List;
 public class Screening { // Remember to remove screening when theatre is full !!!
     private List<String> seating = new ArrayList<>();
     private List<String> temp = new ArrayList<>();
+    private String time;
     private Movie movie;
     private Theatre theatre;
 
@@ -13,13 +14,25 @@ public class Screening { // Remember to remove screening when theatre is full !!
         this.seating = theatre.getSeatList();
 
         theatre.setTaken(start, movie.getLength());
+        setTime(start, movie.getLength());
 
         this.theatre = theatre;
         this.movie = movie;
 
         movie.setScreenings(this); // maybe
+    }
 
-        System.out.println("Screening: " + this);
+    public void setTime(int start, int length) {
+        start *= 15;
+        int hour = (start/60)+12;
+        int min = start%60;
+
+        length *= 15;
+        length = start+length;
+        int hour2 = (length/60)+12;
+        int min2 = length%60;
+
+        this.time = String.format("%d:%02d", hour, min) + " - " + String.format("%d:%02d", hour2, min2);
     }
 
     public List<String> setSeats(int a) {
@@ -40,12 +53,12 @@ public class Screening { // Remember to remove screening when theatre is full !!
         return this.theatre;
     }
 
-    private static String getTime() {
-        return "";
+    private String getTime() {
+        return this.time;
     }
 
     @Override
     public String toString() {
-        return getTime() + "\n I " + getTheatre().getName();
+        return getTime() + "\n i " + getTheatre().getName();
     }
 }

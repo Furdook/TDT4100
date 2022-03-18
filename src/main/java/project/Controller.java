@@ -44,22 +44,23 @@ public class Controller implements Initializable {
     @FXML
     private void pickScreening(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
-        screening = button.getId();
+        screening = button.getText();
+        System.out.println(screening); // KGKEUGHLUHWELIFHLIWRHGLIIHWRGLUWHRGOUWRGH
         App.changeScene("Seating");
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) { // Controls variable button names etc.
-        List<Movie> temp = Movie.getMovies();
-        List<Screening> screenings = Movie.getScreenings();
         switch (App.getScene()) {
             case "Movies":
-                film1.setText(temp.get(0).getTitle());
-                film2.setText(temp.get(1).getTitle());
-                film3.setText(temp.get(2).getTitle());
-                film4.setText(temp.get(3).getTitle());
+            List<Movie> movies = Movie.getMovies();
+                film1.setText(movies.get(0).getTitle());
+                film2.setText(movies.get(1).getTitle());
+                film3.setText(movies.get(2).getTitle());
+                film4.setText(movies.get(3).getTitle());
                 break;
             case "Screenings":
+                List<Screening> screenings = Movie.getMovie(movie).getScreenings();
                 title.setText(movie);
                 screening1.setText(screenings.get(0).toString()); 
                 screening2.setText(screenings.get(1).toString());
@@ -67,7 +68,7 @@ public class Controller implements Initializable {
                 screening4.setText(screenings.get(3).toString());
                 break;
             case "Seating":
-                title.setText("TEST");
+                title.setText(movie);
                 break;
         }
     }
