@@ -23,12 +23,18 @@ public class Movie {
 
         movies.add(this);
 
+        System.out.println("Movie: " + this.title + ", ID: " + this);
+
     }
 
     public static Movie getMovie(String input) {
         Optional<Movie> tmp = movies.stream().filter(p -> p.getTitle().equals(input)).findFirst();
         Movie test = tmp.get();
         return test;
+    }
+
+    public static List<Movie> getMovies() {
+        return movies;
     }
 
     public String getTitle() {
@@ -47,7 +53,7 @@ public class Movie {
         screenings.add(screening);
     }
 
-    public static String getScreening(int index) {
-        return screenings.get(index).toString();
+    public static List<Screening> getScreenings() {
+        return screenings;
     }
 }

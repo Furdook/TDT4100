@@ -28,6 +28,8 @@ public class Theatre {
             this.time.add(i); // Creates timeArray used for timing screenings in this theatre
         }
         theatres.add(this);
+
+        System.out.println("Theatre: " + this.theatreName  + ", ID: " + this);
     }
 
     public static Theatre getTheatre(String input) {

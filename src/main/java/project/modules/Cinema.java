@@ -4,19 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-
-// Will be replaces by text file
 public class Cinema {
 
     private static String[] test2;
-    private static int OPEN = 800; // change to 15 minute increments later
 
-    public static int getOPEN() {
-        return OPEN;
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-
+    public static void Go() throws FileNotFoundException {
         try {
             Scanner test = new Scanner(new File("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/cinema.txt"));
             test.useDelimiter("\n");
@@ -38,26 +30,11 @@ public class Cinema {
             new Movie(string[1], string[2], Integer.parseInt(string[3]));
         }
         else if (check("screening")) {
-            new Screening(Movie.getMovie(getTitle(string[1])), Integer.parseInt(string[2]), Theatre.getTheatre(getTheatreTitle(string[3])));
+            new Screening(Movie.getMovie(getTitle(string[1])), Integer.parseInt(string[2]), Theatre.getTheatre(string[3]));
         }
     }
 
-    public static String getTheatreTitle(String string) {
-        switch (string) {
-            case "theatre1":
-                return "Sal 1";
-            case "theatre2":
-                return "Sal 2";
-            case "theatre3":
-                return "Sal 3";
-            case "theatre4":
-                return "Sal 4";
-            default:
-                return null;
-        }
-    }
-
-    public static String getTitle(String string) {
+    public static String getTitle(String string) { // For simplicity's sake in .txt file, no repeating the title
         switch (string) {
             case "movie1":
                 return "The Imitation Game";
@@ -72,7 +49,7 @@ public class Cinema {
         }
     }
 
-    public static boolean check(String cont) {
+    public static boolean check(String cont) { 
         if (test2[0].contains(cont)) return true;
         else return false;
     }

@@ -18,6 +18,8 @@ public class Screening { // Remember to remove screening when theatre is full !!
         this.movie = movie;
 
         movie.setScreenings(this); // maybe
+
+        System.out.println("Screening: " + this);
     }
 
     public List<String> setSeats(int a) {
@@ -34,8 +36,16 @@ public class Screening { // Remember to remove screening when theatre is full !!
         return this.movie;
     }
 
+    public Theatre getTheatre() {
+        return this.theatre;
+    }
+
+    private static String getTime() {
+        return "";
+    }
+
     @Override
     public String toString() {
-        return this.movie.getTitle() + ", in theatre " + this.theatre.getName();
+        return getTime() + "\n I " + getTheatre().getName();
     }
 }
