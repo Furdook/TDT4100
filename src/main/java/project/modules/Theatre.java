@@ -9,7 +9,7 @@ public class Theatre {
     private List<String> seats = new ArrayList<>();
     private List<Integer> time = new ArrayList<>();
     private static List<Theatre> theatres = new ArrayList<>();
-    private char[] seatChar = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'};
+    private final char[] seatChar = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'};
 
     public Theatre(String name, int size) {
         if (name != null) this.theatreName = name;

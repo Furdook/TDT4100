@@ -9,7 +9,9 @@ public class Ticket {
     private Screening screening;
     private List<String> seating = new ArrayList<>();
     
-    public Ticket() {}
+    public Ticket(String name, Movie movie, Screening screening, int seats) {
+        
+    }
 
     public void setName(boolean a, String name) {
         if (name != null && !name.equals("")) {

@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import project.modules.Movie;
 import project.modules.Screening;
+import project.modules.Ticket;
 
 public class Controller implements Initializable {
     @FXML
@@ -37,7 +38,6 @@ public class Controller implements Initializable {
     private void pickMovie(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
         movie = button.getText();
-        System.out.println("TEST" + movie);
         App.changeScene("Screenings");
     }
 
@@ -45,7 +45,6 @@ public class Controller implements Initializable {
     private void pickScreening(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
         screening = button.getText();
-        System.out.println(screening); // KGKEUGHLUHWELIFHLIWRHGLIIHWRGLUWHRGOUWRGH
         App.changeScene("Seating");
     }
 
@@ -53,7 +52,7 @@ public class Controller implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) { // Controls variable button names etc.
         switch (App.getScene()) {
             case "Movies":
-            List<Movie> movies = Movie.getMovies();
+                List<Movie> movies = Movie.getMovies();
                 film1.setText(movies.get(0).getTitle());
                 film2.setText(movies.get(1).getTitle());
                 film3.setText(movies.get(2).getTitle());
@@ -70,6 +69,8 @@ public class Controller implements Initializable {
             case "Seating":
                 title.setText(movie);
                 break;
+            case "Ticket":
+                //new Ticket("", Movie.getMovie(movie), Screening.getScreening(screening), 3);
         }
     }
 }
