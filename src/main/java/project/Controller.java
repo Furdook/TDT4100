@@ -26,7 +26,7 @@ public class Controller implements Initializable {
 
     // For the variable user interface 
     @FXML
-    private static String movie, screening;
+    private static String movie, screening, screeningButton;
 
     @FXML
     private void swapPage(ActionEvent e) throws IOException {
@@ -45,6 +45,7 @@ public class Controller implements Initializable {
     private void pickScreening(ActionEvent e) throws IOException {
         Button button = (Button) e.getSource();
         screening = button.getText();
+        screeningButton = button.getId();
         App.changeScene("Seating");
     }
 
@@ -70,7 +71,9 @@ public class Controller implements Initializable {
                 title.setText(movie);
                 break;
             case "Ticket":
-                //new Ticket("", Movie.getMovie(movie), Screening.getScreening(screening), 3);
+                Movie tmp = Movie.getMovie(movie);
+
+                new Ticket("Name", tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46);
         }
     }
 }

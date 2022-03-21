@@ -53,4 +53,9 @@ public class Movie {
     public List<Screening> getScreenings() {
         return this.screenings;
     }
+
+    @Override
+    public String toString() {
+        return getTitle();
+    }
 }

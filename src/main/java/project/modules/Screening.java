@@ -45,15 +45,15 @@ public class Screening { // Remember to remove screening when theatre is full !!
         return this.seating;
     }
 
-    public Movie getMovie() {
-        return this.movie;
+    public String getMovie() {
+        return this.movie.toString();
     }
 
     public Theatre getTheatre() {
         return this.theatre;
     }
 
-    private String getTime() {
+    public String getTime() {
         return this.time;
     }
 

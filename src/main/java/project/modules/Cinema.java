@@ -10,15 +10,19 @@ public class Cinema {
 
     public static void Go() throws FileNotFoundException {
         try {
-            Scanner test = new Scanner(new File("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/cinema.txt"));
-            test.useDelimiter("\n");
+            Scanner cinema = new Scanner(new File("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/cinema.txt"));
+            cinema.useDelimiter("\n");
 
-            while (test.hasNext()) {
-               String string = test.next();
+            while (cinema.hasNext()) {
+               String string = cinema.next();
                test2 = string.split(";");
                createObjects(test2);
             }
-            test.close();
+            cinema.close();
+        } catch (Exception e) { e.printStackTrace(); }
+
+        try {
+            
         } catch (Exception e) { e.printStackTrace(); }
     }
 
