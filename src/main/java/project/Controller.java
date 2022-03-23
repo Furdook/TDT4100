@@ -9,12 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import project.modules.Movie;
 import project.modules.Screening;
 import project.modules.Ticket2;
 
 public class Controller implements Initializable {
+
+    private Boolean hasTicket = false;
+
     @FXML
     private Button screening1, screening2, screening3, screening4;
 
@@ -23,6 +27,9 @@ public class Controller implements Initializable {
 
     @FXML
     private Text title;
+
+    @FXML
+    private TextArea ticketText;
 
     // For the variable user interface 
     @FXML
@@ -71,9 +78,18 @@ public class Controller implements Initializable {
                 title.setText(movie);
                 break;
             case "Ticket":
-                Movie tmp = Movie.getMovie(movie);
-
-                new Ticket2("Name", tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46);
+                if (movie != null) {
+                    Movie tmp = Movie.getMovie(movie);
+                    Ticket2 userTicket = new Ticket2("Name", tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46);;
+                }
+                if (!hasTicket) {
+                  title.setText("Your Ticket");
+                  hasTicket = true;
+                }
+                else if (hasTicket) {
+                    ticketText.setText(userTicket.toString());
+                }
+                break;
         }
     }
 }

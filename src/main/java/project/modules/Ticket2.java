@@ -17,7 +17,7 @@ public class Ticket2 {
         setSeating(seats);
 
         try (PrintWriter txt = new PrintWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt")) {
-            txt.println(name+";"+movie+";"+screening.getTime()+";"+getSeats());
+            txt.println(name+";"+movie+";"+screening.getTime()+";"+getSeats()+"\n");
         } catch (FileNotFoundException e) { e.printStackTrace(); }
     }
 
@@ -55,6 +55,6 @@ public class Ticket2 {
 
     @Override
     public String toString() {
-        return "Ticket: "  + this.screening.getMovie() + " at " + getScreening() + ", Seats: " + getSeats();
+        return this.screening.getMovie() + " at " + getScreening() + ", Seats: " + getSeats();
     }
 }
