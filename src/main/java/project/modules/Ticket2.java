@@ -5,13 +5,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ticket {
+public class Ticket2 {
     private String firstName;
     private String lastName;
     private Screening screening;
     private List<String> seating = new ArrayList<>();
     
-    public Ticket(String name, Movie movie, Screening screening, int seats) {
+    public Ticket2(String name, Movie movie, Screening screening, int seats) {
         
         setScreening(screening);
         setSeating(seats);

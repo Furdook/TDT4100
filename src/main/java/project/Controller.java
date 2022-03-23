@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import project.modules.Movie;
 import project.modules.Screening;
-import project.modules.Ticket;
+import project.modules.Ticket2;
 
 public class Controller implements Initializable {
     @FXML
@@ -73,7 +73,7 @@ public class Controller implements Initializable {
             case "Ticket":
                 Movie tmp = Movie.getMovie(movie);
 
-                new Ticket("Name", tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46);
+                new Ticket2("Name", tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46);
         }
     }
 }
