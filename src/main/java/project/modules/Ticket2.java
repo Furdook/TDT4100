@@ -1,32 +1,32 @@
 package project.modules;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ticket2 {
     private String firstName;
     private String lastName;
     private Screening screening;
     private List<String> seating = new ArrayList<>();
+    private static String[] test2;
+    private static List<String> screenings = new ArrayList<>();
     
-    public Ticket2(String name, Movie movie, Screening screening, int seats) {
+    public Ticket2(Movie movie, Screening screening, int seats) {
         
         setScreening(screening);
         setSeating(seats);
 
-        try (PrintWriter txt = new PrintWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt")) {
-            txt.println(name+";"+movie+";"+screening.getTime()+";"+getSeats()+"\n");
-        } catch (FileNotFoundException e) { e.printStackTrace(); }
-    }
+        System.out.println("Creating Ticket");
 
-    public void setName(boolean a, String name) {
-        if (name != null && !name.equals("")) {
-            if (a) this.firstName = name;
-            else this.lastName = name;
-        }
-        else throw new IllegalArgumentException("Name can not be null");
+        try (PrintWriter txt = new PrintWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt")) {
+            txt.println(movie+";"+screening.getTime()+";"+getSeats()+"\n");
+        } catch (FileNotFoundException e) { e.printStackTrace(); }
+
+        screenings.add(this.toString());
     }
 
     public void setScreening(Screening screening) {
@@ -51,6 +51,27 @@ public class Ticket2 {
 
     public List<String> getSeats() {
         return this.seating;
+    }
+
+    public static void loadTickets() {
+        System.out.println("Loading Tickets");
+        try {
+            Scanner cinema = new Scanner(new File("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt"));
+            cinema.useDelimiter("\n");
+
+            while (cinema.hasNext()) {
+                String string = cinema.next();
+                test2 = string.split(";");
+                System.out.println(test2.toString());
+                Movie movie = Movie.getMovie(test2[1]);
+                new Ticket2(movie, Cinema.findScreening(movie, test2[2]), test2[3].length());
+            }
+            cinema.close();
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public static String getTickets() {
+        return screenings.toString();
     }
 
     @Override

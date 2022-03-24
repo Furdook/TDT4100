@@ -2,6 +2,8 @@ package project.modules;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Cinema {
@@ -20,10 +22,7 @@ public class Cinema {
             }
             cinema.close();
         } catch (Exception e) { e.printStackTrace(); }
-
-        try {
-            
-        } catch (Exception e) { e.printStackTrace(); }
+        Ticket2.loadTickets();
     }
 
     public static void createObjects(String[] string) {
@@ -56,6 +55,16 @@ public class Cinema {
     public static boolean check(String cont) { 
         if (test2[0].contains(cont)) return true;
         else return false;
+    }
+
+    public static boolean hasTicket() {
+        return true;
+    }
+
+    public static Screening findScreening(Movie movie, String screening) throws NoSuchElementException {
+        Optional<Screening> tmp = movie.getScreenings().stream().filter(p -> p.toString().equals(screening)).findFirst();
+        Screening temp = tmp.get();
+        return temp;
     }
 }
 

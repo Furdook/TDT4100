@@ -2,6 +2,7 @@ package project;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -11,13 +12,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import project.modules.Cinema;
 import project.modules.Movie;
 import project.modules.Screening;
 import project.modules.Ticket2;
 
 public class Controller implements Initializable {
-
-    private Boolean hasTicket = false;
 
     @FXML
     private Button screening1, screening2, screening3, screening4;
@@ -78,17 +78,11 @@ public class Controller implements Initializable {
                 title.setText(movie);
                 break;
             case "Ticket":
-                if (movie != null) {
+                if (!Cinema.hasTicket()) {
                     Movie tmp = Movie.getMovie(movie);
-                    Ticket2 userTicket = new Ticket2("Name", tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46);;
+                    new Ticket2(tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46);;
                 }
-                if (!hasTicket) {
-                  title.setText("Your Ticket");
-                  hasTicket = true;
-                }
-                else if (hasTicket) {
-                    ticketText.setText(userTicket.toString());
-                }
+                ticketText.setText(Ticket2.getTickets());
                 break;
         }
     }

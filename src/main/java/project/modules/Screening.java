@@ -59,6 +59,6 @@ public class Screening { // Remember to remove screening when theatre is full !!
 
     @Override
     public String toString() {
-        return getTime() + "\n i " + getTheatre().getName();
+        return getTime();
     }
 }
