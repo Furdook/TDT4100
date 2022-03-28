@@ -2,7 +2,6 @@ package project;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -20,10 +19,7 @@ import project.modules.Ticket2;
 public class Controller implements Initializable {
 
     @FXML
-    private Button screening1, screening2, screening3, screening4;
-
-    @FXML
-    private Button film1, film2, film3, film4;
+    private Button screening1, screening2, screening3, screening4, film1, film2, film3, film4;
 
     @FXML
     private Text title;

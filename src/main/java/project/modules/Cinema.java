@@ -28,6 +28,7 @@ public class Cinema {
     public static void createObjects(String[] string) {
         if (check("theatre")) {
             new Theatre(string[1], Integer.parseInt(string[2]));
+            System.out.println(string[2]);
         }
         else if (check("movie")) {
             new Movie(string[1], string[2], Integer.parseInt(string[3]));
@@ -58,12 +59,16 @@ public class Cinema {
     }
 
     public static boolean hasTicket() {
-        return true;
+        if (Ticket2.getTickets() != null) {
+            return true;
+        }
+        return false;
     }
 
     public static Screening findScreening(Movie movie, String screening) throws NoSuchElementException {
         Optional<Screening> tmp = movie.getScreenings().stream().filter(p -> p.toString().equals(screening)).findFirst();
         Screening temp = tmp.get();
+        System.out.println(temp.toString());
         return temp;
     }
 }
