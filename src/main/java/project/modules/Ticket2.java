@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Ticket2 {
@@ -17,17 +16,16 @@ public class Ticket2 {
     private static String[] test2;
     private static List<String> screenings = new ArrayList<>();
     
-    public Ticket2(Movie movie, Screening screening, int seats) {
+    public Ticket2(Movie movie, Screening screening, int seats, boolean exists) {
         
         setScreening(screening);
         setSeating(seats);
 
-        System.out.println("Creating Ticket");
-
-        try (PrintWriter txt = new PrintWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt")) {
-            txt.println(movie+";"+screening.getTime()+";"+getSeats()+"\n");
-        } catch (FileNotFoundException e) { e.printStackTrace(); }
-
+        if (!exists) {
+            try (PrintWriter txt = new PrintWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt")) {
+                txt.println(movie+";"+screening.getTime()+";"+getSeats()+"\n");
+            } catch (FileNotFoundException e) { e.printStackTrace(); }
+        }
         screenings.add(this.toString());
     }
 
@@ -63,8 +61,7 @@ public class Ticket2 {
                 test2 = string.split(";");
                 Movie movie = Movie.getMovie(test2[0]);
                 List<String> seats = new ArrayList<>(Arrays.asList(test2[2].split(",")));
-                System.out.println(seats.size() + "SEATS");
-                screenings.add(new Ticket2(movie, Cinema.findScreening(movie, test2[1]), seats.size()).toString());
+                screenings.add(new Ticket2(movie, Cinema.findScreening(movie, test2[1]), seats.size(), true).toString());
             }
             cinema.close();
         } catch (Exception e) { e.printStackTrace(); }

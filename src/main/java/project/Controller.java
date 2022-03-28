@@ -76,7 +76,7 @@ public class Controller implements Initializable {
             case "Ticket":
                 if (!Cinema.hasTicket()) {
                     Movie tmp = Movie.getMovie(movie);
-                    new Ticket2(tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46);;
+                    new Ticket2(tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46, false);
                 }
                 ticketText.setText(Ticket2.getTickets());
                 break;
