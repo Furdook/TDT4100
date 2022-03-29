@@ -75,6 +75,7 @@ public class Controller implements Initializable {
                 break;
             case "Ticket":
                 if (!lastPage.equals("Movies")) { 
+                    System.out.println("CREATING TICKET");
                      createTicket(Movie.getMovie(movie), Movie.getMovie(movie).getScreenings()
                     .get(Integer
                     .parseInt(screeningButton

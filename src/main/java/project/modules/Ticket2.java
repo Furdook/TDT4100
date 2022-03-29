@@ -14,7 +14,7 @@ public class Ticket2 {
     private Screening screening;
     private List<String> seating = new ArrayList<>();
     private static String[] test2;
-    private static List<String> tickets = new ArrayList<>();
+    private static List<Ticket2> tickets = new ArrayList<>();
     
     public Ticket2(Movie movie, Screening screening, int seats, boolean exists) {
         
@@ -26,7 +26,9 @@ public class Ticket2 {
                 txt.println(movie.getTitle()+";"+screening.getTime()+";"+getSeats()+"\n");
             } catch (FileNotFoundException e) { e.printStackTrace(); }
         }
-        tickets.add(this.toString());
+        tickets.add(this);
+
+        System.out.println("CONSTRUCTOR "+tickets);
     }
 
     public void setScreening(Screening screening) {
@@ -60,23 +62,25 @@ public class Ticket2 {
                 String string = cinema.next();
                 test2 = string.split(";");
 
-                if (test2.length != 0) {
+                if (test2.length > 2) { // required to prevent out of bounds error on Array
                     Movie movie = Movie.getMovie(test2[0]);
                     List<String> seats = new ArrayList<>(Arrays.asList(test2[2].split(",")));
 
-                    tickets.add(new Ticket2(movie, Screening.findScreening(movie, test2[1]), seats.size(), true).toString());
+                    new Ticket2(movie, Screening.findScreening(movie, test2[1]), seats.size(), true);
+                    System.out.println("LOADTICKETS "+ tickets);
                 }
             }
             cinema.close();
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    public static String getTickets() {
-        return tickets.toString();
+    public static List<Ticket2> getTickets() {
+        System.out.println("GETTICKETS "+tickets);
+        return tickets;
     }
 
     @Override
     public String toString() {
-        return this.screening.getMovie().getTitle() + " at " + getScreening() + ", Seats: " + getSeats();
+        return this.screening.getMovie().getTitle() + " at " + getScreening() + ", Seats: " + getSeats() + "\n";
     }
 }
