@@ -67,15 +67,18 @@ public class Controller implements Initializable {
             case "Movies":
                 List<Movie> movies = Movie.getMovies();
                 List<Button> btns = Arrays.asList(film1, film2, film3, film4);
+
                 int i = 0;
                 for (Button button : btns) {
                     button.setText(movies.get(i).getTitle());
                     i++;
                 }
                 break;
+
             case "Screenings":
                 List<Screening> screenings = Movie.getMovie(movie).getScreenings();
                 List<Button> btns2 = Arrays.asList(screening1, screening2, screening3, screening4);
+                
                 int j = 0;
                 for (Button button : btns2) { // check if ticket already exists for each screening
                     if (!Ticket2.checkTicket(screenings.get(j).toString()))
@@ -86,6 +89,7 @@ public class Controller implements Initializable {
                 }
                 title.setText(movie);
                 break;
+
             case "Seating":
                 title.setText(movie);
                 textInput.setOnAction(new EventHandler<ActionEvent>() { // on Enter pressed
@@ -109,6 +113,7 @@ public class Controller implements Initializable {
                     }
                 });
                 break;
+
             case "Ticket":
                 if (!lastPage.equals("Movies")) {  // only create a new ticket if a new one is made, cheeky
                      new Ticket2(Movie.getMovie(movie), getScreening(), inti, false);
