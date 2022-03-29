@@ -14,7 +14,7 @@ public class Ticket2 {
     private Screening screening;
     private List<String> seating = new ArrayList<>();
     private static String[] test2;
-    private static List<String> screenings = new ArrayList<>();
+    private static List<String> tickets = new ArrayList<>();
     
     public Ticket2(Movie movie, Screening screening, int seats, boolean exists) {
         
@@ -23,10 +23,10 @@ public class Ticket2 {
 
         if (!exists) {
             try (PrintWriter txt = new PrintWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt")) {
-                txt.println(movie+";"+screening.getTime()+";"+getSeats()+"\n");
+                txt.println(movie.getTitle()+";"+screening.getTime()+";"+getSeats()+"\n");
             } catch (FileNotFoundException e) { e.printStackTrace(); }
         }
-        screenings.add(this.toString());
+        tickets.add(this.toString());
     }
 
     public void setScreening(Screening screening) {
@@ -59,20 +59,24 @@ public class Ticket2 {
             while (cinema.hasNext()) {
                 String string = cinema.next();
                 test2 = string.split(";");
-                Movie movie = Movie.getMovie(test2[0]);
-                List<String> seats = new ArrayList<>(Arrays.asList(test2[2].split(",")));
-                screenings.add(new Ticket2(movie, Cinema.findScreening(movie, test2[1]), seats.size(), true).toString());
+
+                if (test2.length != 0) {
+                    Movie movie = Movie.getMovie(test2[0]);
+                    List<String> seats = new ArrayList<>(Arrays.asList(test2[2].split(",")));
+
+                    tickets.add(new Ticket2(movie, Screening.findScreening(movie, test2[1]), seats.size(), true).toString());
+                }
             }
             cinema.close();
         } catch (Exception e) { e.printStackTrace(); }
     }
 
     public static String getTickets() {
-        return screenings.toString();
+        return tickets.toString();
     }
 
     @Override
     public String toString() {
-        return this.screening.getMovie() + " at " + getScreening() + ", Seats: " + getSeats();
+        return this.screening.getMovie().getTitle() + " at " + getScreening() + ", Seats: " + getSeats();
     }
 }

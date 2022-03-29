@@ -11,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
-import project.modules.Cinema;
 import project.modules.Movie;
 import project.modules.Screening;
 import project.modules.Ticket2;
@@ -29,10 +28,11 @@ public class Controller implements Initializable {
 
     // For the variable user interface 
     @FXML
-    private static String movie, screening, screeningButton;
+    private static String movie, screening, screeningButton, lastPage;
 
     @FXML
     private void swapPage(ActionEvent e) throws IOException {
+        lastPage = App.getScene();
         Button button = (Button) e.getSource();
         App.changeScene(button.getId());
     }
@@ -74,12 +74,20 @@ public class Controller implements Initializable {
                 title.setText(movie);
                 break;
             case "Ticket":
-                if (!Cinema.hasTicket()) {
-                    Movie tmp = Movie.getMovie(movie);
-                    new Ticket2(tmp, tmp.getScreenings().get(Integer.parseInt(screeningButton.split("(?<=\\D)(?=\\d)")[1].toString())-1), 46, false);
+                if (!lastPage.equals("Movies")) { 
+                     createTicket(Movie.getMovie(movie), Movie.getMovie(movie).getScreenings()
+                    .get(Integer
+                    .parseInt(screeningButton
+                    .split("(?<=\\D)(?=\\d)")[1]
+                    .toString())-1), 4); 
+
                 }
-                ticketText.setText(Ticket2.getTickets());
+                ticketText.setText(Ticket2.getTickets().toString());
                 break;
         }
+    }
+
+    private void createTicket(Movie movie, Screening screening, int seats) {
+        new Ticket2(movie, screening, seats, false); // CHANGE SEAT AMOUNT
     }
 }
