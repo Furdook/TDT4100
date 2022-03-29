@@ -16,33 +16,13 @@
          </font>
       </Text>
       <Button fx:id="Screenings" graphicTextGap="20.0" layoutX="20.0" layoutY="675.0" mnemonicParsing="false" onAction="#swapPage" style="-fx-pref-height: 100; -fx-pref-width: 360;" text="Go back" textAlignment="CENTER" />
-      <Button fx:id="Ticket" graphicTextGap="20.0" layoutX="20.0" layoutY="565.0" mnemonicParsing="false" onAction="#swapPage" style="-fx-pref-height: 100; -fx-pref-width: 360;" text="See ticket" textAlignment="CENTER" />
-      <TextField fx:id="textInput" layoutX="20.0" layoutY="289.0" prefHeight="37.0" prefWidth="360.0">
-         <padding>
-            <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
-         </padding>
-      </TextField>
-      <TextField fx:id="textInput1" layoutX="20.0" layoutY="138.0" prefHeight="37.0" prefWidth="360.0">
-         <padding>
-            <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
-         </padding>
-      </TextField>
-      <TextField fx:id="textInput2" layoutX="20.0" layoutY="227.0" prefHeight="37.0" prefWidth="360.0">
+      <Button fx:id="Ticket" disable="true" graphicTextGap="20.0" layoutX="20.0" layoutY="565.0" mnemonicParsing="false" onAction="#swapPage" style="-fx-pref-height: 100; -fx-pref-width: 360;" text="See ticket" textAlignment="CENTER" />
+      <TextField fx:id="textInput" layoutX="20.0" layoutY="138.0" prefHeight="37.0" prefWidth="360.0">
          <padding>
             <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
          </padding>
       </TextField>
       <Text fill="WHITE" layoutX="20.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How many seats?">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="20.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="20.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name">
          <font>
             <Font size="16.0" />
          </font>

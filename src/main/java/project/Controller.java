@@ -2,14 +2,17 @@ package project;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import project.modules.Movie;
 import project.modules.Screening;
@@ -18,7 +21,7 @@ import project.modules.Ticket2;
 public class Controller implements Initializable {
 
     @FXML
-    private Button screening1, screening2, screening3, screening4, film1, film2, film3, film4;
+    private Button screening1, screening2, screening3, screening4, film1, film2, film3, film4, Ticket;
 
     @FXML
     private Text title;
@@ -26,9 +29,15 @@ public class Controller implements Initializable {
     @FXML
     private TextArea ticketText;
 
+    @FXML
+    private TextField textInput;
+
     // For the variable user interface 
     @FXML
     private static String movie, screening, screeningButton, lastPage;
+
+    @FXML
+    private static Integer inti;
 
     @FXML
     private void swapPage(ActionEvent e) throws IOException {
@@ -57,31 +66,50 @@ public class Controller implements Initializable {
         switch (App.getScene()) {
             case "Movies":
                 List<Movie> movies = Movie.getMovies();
-                film1.setText(movies.get(0).getTitle());
-                film2.setText(movies.get(1).getTitle());
-                film3.setText(movies.get(2).getTitle());
-                film4.setText(movies.get(3).getTitle());
+                List<Button> btns = Arrays.asList(film1, film2, film3, film4);
+                int i = 0;
+                for (Button button : btns) {
+                    button.setText(movies.get(i).getTitle());
+                    i++;
+                }
                 break;
             case "Screenings":
                 List<Screening> screenings = Movie.getMovie(movie).getScreenings();
+                List<Button> btns2 = Arrays.asList(screening1, screening2, screening3, screening4);
+                int j = 0;
+                for (Button button : btns2) {
+                    if (!Ticket2.checkTicket(screenings.get(j).toString()))
+                        button.setDisable(true);
+                    
+                    button.setText(screenings.get(j).toString());
+                    j++;
+                }
                 title.setText(movie);
-                screening1.setText(screenings.get(0).toString()); 
-                screening2.setText(screenings.get(1).toString());
-                screening3.setText(screenings.get(2).toString());
-                screening4.setText(screenings.get(3).toString());
                 break;
             case "Seating":
                 title.setText(movie);
+                textInput.setOnAction(new EventHandler<ActionEvent>() { // on Enter pressed
+
+                    @Override
+                    public void handle(ActionEvent arg0) {
+                        if (!Double.isNaN(Integer.parseInt(textInput.getText()))) { // check if value is a number
+                            if (getScreening().getSeats().size() > Integer.parseInt(textInput.getText())) { // check if there are enough seats
+                                Ticket.setDisable(false);
+                                inti = Integer.parseInt(textInput.getText());
+                                Ticket.setText("See Ticket");
+                            }
+                            else {
+                                Ticket.setText("Not enough available seats");
+                                Ticket.setDisable(true);
+                            }
+                        }
+                        else Ticket.setDisable(true);
+                    }
+                });
                 break;
             case "Ticket":
                 if (!lastPage.equals("Movies")) { 
-                    System.out.println("CREATING TICKET");
-                     createTicket(Movie.getMovie(movie), Movie.getMovie(movie).getScreenings()
-                    .get(Integer
-                    .parseInt(screeningButton
-                    .split("(?<=\\D)(?=\\d)")[1]
-                    .toString())-1), 4); 
-
+                     createTicket(Movie.getMovie(movie), getScreening(), inti); 
                 }
                 ticketText.setText(Ticket2.getTickets().toString());
                 break;
@@ -90,5 +118,13 @@ public class Controller implements Initializable {
 
     private void createTicket(Movie movie, Screening screening, int seats) {
         new Ticket2(movie, screening, seats, false); // CHANGE SEAT AMOUNT
+    }
+
+    private Screening getScreening() {
+        return Movie.getMovie(movie).getScreenings()
+                            .get(Integer
+                            .parseInt(screeningButton
+                            .split("(?<=\\D)(?=\\d)")[1]
+                            .toString())-1);
     }
 }

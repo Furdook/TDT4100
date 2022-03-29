@@ -17,18 +17,23 @@ public class Ticket2 {
     private static List<Ticket2> tickets = new ArrayList<>();
     
     public Ticket2(Movie movie, Screening screening, int seats, boolean exists) {
-        
-        setScreening(screening);
-        setSeating(seats);
+        if (checkTicket(screening.toString())) {
 
-        if (!exists) {
+            setScreening(screening);
+            setSeating(seats);
+            
             try (PrintWriter txt = new PrintWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt")) {
-                txt.println(movie.getTitle()+";"+screening.getTime()+";"+getSeats()+"\n");
+                txt.println(movie.getTitle()+";"+screening.getTime()+";"+getSeats());
             } catch (FileNotFoundException e) { e.printStackTrace(); }
-        }
-        tickets.add(this);
 
-        System.out.println("CONSTRUCTOR "+tickets);
+            tickets.add(this);
+        }
+        else throw new IllegalArgumentException("Ticket already exists");
+    }
+
+    public static Boolean checkTicket(String input) {
+        if (!tickets.stream().anyMatch(p -> p.getScreening().equals(input))) return true;
+        else return false;
     }
 
     public void setScreening(Screening screening) {
@@ -67,7 +72,6 @@ public class Ticket2 {
                     List<String> seats = new ArrayList<>(Arrays.asList(test2[2].split(",")));
 
                     new Ticket2(movie, Screening.findScreening(movie, test2[1]), seats.size(), true);
-                    System.out.println("LOADTICKETS "+ tickets);
                 }
             }
             cinema.close();
@@ -75,12 +79,11 @@ public class Ticket2 {
     }
 
     public static List<Ticket2> getTickets() {
-        System.out.println("GETTICKETS "+tickets);
         return tickets;
     }
 
     @Override
     public String toString() {
-        return this.screening.getMovie().getTitle() + " at " + getScreening() + ", Seats: " + getSeats() + "\n";
+        return (this.screening.getMovie().getTitle() + "\n" + getScreening() + "\n" + getSeats() + "\n\n").replaceAll("\\]\\[\\,", "");
     }
 }

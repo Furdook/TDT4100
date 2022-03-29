@@ -7,7 +7,7 @@
 
 <Pane prefHeight="850.0" prefWidth="400.0" style="-fx-background-color: #2c232d;" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.Controller">
    <children>
-      <Text fx:id="title" fill="WHITE" layoutX="125.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="{MovieTitle}">
+      <Text fx:id="title" fill="WHITE" layoutX="20.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="{MovieTitle}">
          <font>
             <Font size="30.0" />
          </font>
