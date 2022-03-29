@@ -83,7 +83,7 @@ public class Ticket2 {
     }
 
     @Override
-    public String toString() {
-        return (this.screening.getMovie().getTitle() + "\n" + getScreening() + "\n" + getSeats() + "\n\n").replaceAll("\\]\\[\\,", "");
+    public String toString() { // work in prgress
+        return (this.screening.getMovie().getTitle() + "\n" + getScreening() + "\n" + getSeats() + "\n\n");
     }
 }

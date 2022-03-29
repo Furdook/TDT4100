@@ -37,7 +37,7 @@ public class Controller implements Initializable {
     private static String movie, screening, screeningButton, lastPage;
 
     @FXML
-    private static Integer inti;
+    private static Integer inti; // number of seats from seating.fxml
 
     @FXML
     private void swapPage(ActionEvent e) throws IOException {
@@ -62,7 +62,7 @@ public class Controller implements Initializable {
     }
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) { // Controls variable button names etc.
+    public void initialize(URL arg0, ResourceBundle arg1) throws NumberFormatException { // Controls variable button names etc.
         switch (App.getScene()) {
             case "Movies":
                 List<Movie> movies = Movie.getMovies();
@@ -77,7 +77,7 @@ public class Controller implements Initializable {
                 List<Screening> screenings = Movie.getMovie(movie).getScreenings();
                 List<Button> btns2 = Arrays.asList(screening1, screening2, screening3, screening4);
                 int j = 0;
-                for (Button button : btns2) {
+                for (Button button : btns2) { // check if ticket already exists for each screening
                     if (!Ticket2.checkTicket(screenings.get(j).toString()))
                         button.setDisable(true);
                     
@@ -92,35 +92,33 @@ public class Controller implements Initializable {
 
                     @Override
                     public void handle(ActionEvent arg0) {
-                        if (!Double.isNaN(Integer.parseInt(textInput.getText()))) { // check if value is a number
-                            if (getScreening().getSeats().size() > Integer.parseInt(textInput.getText())) { // check if there are enough seats
-                                Ticket.setDisable(false);
-                                inti = Integer.parseInt(textInput.getText());
-                                Ticket.setText("See Ticket");
-                            }
-                            else {
-                                Ticket.setText("Not enough available seats");
-                                Ticket.setDisable(true);
+                        try {
+                            if (!Double.isNaN(Integer.parseInt(textInput.getText()))) { // check if value is a number
+                                if (getScreening().getSeats().size() > Integer.parseInt(textInput.getText())) { // check if there are enough seats
+                                    Ticket.setDisable(false); // enables ticket page if it's feasible 
+                                    inti = Integer.parseInt(textInput.getText());
+                                    Ticket.setText("See ticket");
+                                }
+                                else {
+                                    Ticket.setText("Not enough available seats");
+                                    Ticket.setDisable(true);
+                                }
                             }
                         }
-                        else Ticket.setDisable(true);
+                        catch (Exception e) { Ticket.setDisable(true); }
                     }
                 });
                 break;
             case "Ticket":
-                if (!lastPage.equals("Movies")) { 
-                     createTicket(Movie.getMovie(movie), getScreening(), inti); 
+                if (!lastPage.equals("Movies")) {  // only create a new ticket if a new one is made, cheeky
+                     new Ticket2(Movie.getMovie(movie), getScreening(), inti, false);
                 }
                 ticketText.setText(Ticket2.getTickets().toString());
                 break;
         }
     }
 
-    private void createTicket(Movie movie, Screening screening, int seats) {
-        new Ticket2(movie, screening, seats, false); // CHANGE SEAT AMOUNT
-    }
-
-    private Screening getScreening() {
+    private Screening getScreening() { // cleaner 
         return Movie.getMovie(movie).getScreenings()
                             .get(Integer
                             .parseInt(screeningButton
