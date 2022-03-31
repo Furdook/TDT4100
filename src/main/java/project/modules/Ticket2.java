@@ -73,10 +73,7 @@ public class Ticket2 {
 
                 if (stringArray.length > 2) { // required to prevent out of bounds error on Array 
                     Movie movie = Movie.getMovie(stringArray[0]);
-                    System.out.println(movie.getTitle());
                     List<String> seats = new ArrayList<>(Arrays.asList(stringArray[2].split(",")));
-                    System.out.println(seats.size());
-                    System.out.println(Screening.findScreening(movie, stringArray[1]));
                     new Ticket2(movie, Screening.findScreening(movie, stringArray[1]), seats.size(), true);
                 }
             }

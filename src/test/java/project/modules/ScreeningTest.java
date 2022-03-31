@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class ScreeningTest {
     Screening test;
-    Movie movie = new Movie("The Imitation Game", "English", 8);
+    Movie movie = new Movie("The Imitation Game", 8);
     Theatre theatre = new Theatre("Test", 50);
 
     @BeforeEach

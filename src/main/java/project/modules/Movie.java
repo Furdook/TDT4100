@@ -10,7 +10,7 @@ public class Movie {
     private List<Screening> screenings = new ArrayList<>();
     private static List<Movie> movies = new ArrayList<>();
 
-    public Movie(String title, String language, int length) {
+    public Movie(String title, int length) {
         if (title != null && !title.equals("")) this.title = title;
         else throw new IllegalArgumentException("Title can not be null");
 

@@ -28,7 +28,7 @@ public class Cinema {
             new Theatre(string[1], Integer.parseInt(string[2]));
         }
         else if (check("movie")) {
-            new Movie(string[1], string[2], Integer.parseInt(string[3]));
+            new Movie(string[1], Integer.parseInt(string[3]));
         }
         else if (check("screening")) {
             new Screening(Movie.getMovie(getTitle(string[1])), Integer.parseInt(string[2]), Theatre.getTheatre(string[3]));
