@@ -81,7 +81,7 @@ public class Controller implements Initializable {
                 
                 int j = 0;
                 for (Button button : btns2) { // check if ticket already exists for each screening
-                    if (!Ticket2.checkTicket(screenings.get(j).toString()))
+                    if (!Ticket2.checkTicket(screenings.get(j).toString(), movie))
                         button.setDisable(true);
                     
                     button.setText(screenings.get(j).toString());
@@ -116,7 +116,9 @@ public class Controller implements Initializable {
 
             case "Ticket":
                 if (!lastPage.equals("Movies")) {  // only create a new ticket if a new one is made, cheeky
-                     new Ticket2(Movie.getMovie(movie), getScreening(), inti, false);
+                     try {
+                        new Ticket2(Movie.getMovie(movie), getScreening(), inti, false);
+                    } catch (IOException e) { e.printStackTrace(); }
                 }
                 ticketText.setText(Ticket2.getTickets().toString());
                 break;

@@ -1,14 +1,17 @@
 package project.modules;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Ticket2 {
+    private String movie;
     private String firstName;
     private String lastName;
     private Screening screening;
@@ -16,23 +19,26 @@ public class Ticket2 {
     private static String[] test2;
     private static List<Ticket2> tickets = new ArrayList<>();
     
-    public Ticket2(Movie movie, Screening screening, int seats, boolean exists) {
-        if (checkTicket(screening.toString())) {
+    public Ticket2(Movie movie, Screening screening, int seats, boolean exists) throws IOException {
+        if (checkTicket(screening.toString(), movie.getTitle())) {
 
             setScreening(screening);
             setSeating(seats);
+            this.movie = movie.getTitle();
             
-            try (PrintWriter txt = new PrintWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt")) {
-                txt.println(movie.getTitle()+";"+screening.getTime()+";"+getSeats());
-            } catch (FileNotFoundException e) { e.printStackTrace(); }
+            if(!exists) {
+                try (BufferedWriter txt = new BufferedWriter(new FileWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt", true))) {
+                    txt.write(movie.getTitle()+";"+screening.getTime()+";"+getSeats()+"/");
+               } catch (FileNotFoundException e) { e.printStackTrace(); }
+            }
 
             tickets.add(this);
         }
         else throw new IllegalArgumentException("Ticket already exists");
     }
 
-    public static Boolean checkTicket(String input) {
-        if (!tickets.stream().anyMatch(p -> p.getScreening().equals(input))) return true;
+    public static Boolean checkTicket(String input, String movie) {
+        if (!tickets.stream().anyMatch(p -> p.getScreening().equals(input) && p.getMovie().equals(movie))) return true;
         else return false;
     }
 
@@ -54,6 +60,10 @@ public class Ticket2 {
         return this.screening.toString();
     }
 
+    private String getMovie() {
+        return this.movie.toString();
+    }
+
     public List<String> getSeats() {
         return this.seating;
     }
@@ -61,16 +71,18 @@ public class Ticket2 {
     public static void loadTickets() {
         try {
             Scanner cinema = new Scanner(new File("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt"));
-            cinema.useDelimiter("\n");
+            cinema.useDelimiter("/");
 
             while (cinema.hasNext()) {
                 String string = cinema.next();
                 test2 = string.split(";");
 
-                if (test2.length > 2) { // required to prevent out of bounds error on Array
+                if (test2.length > 2) { // required to prevent out of bounds error on Array 
                     Movie movie = Movie.getMovie(test2[0]);
+                    System.out.println(movie.getTitle());
                     List<String> seats = new ArrayList<>(Arrays.asList(test2[2].split(",")));
-
+                    System.out.println(seats.size());
+                    System.out.println(Screening.findScreening(movie, test2[1]));
                     new Ticket2(movie, Screening.findScreening(movie, test2[1]), seats.size(), true);
                 }
             }
