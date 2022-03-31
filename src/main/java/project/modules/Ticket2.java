@@ -16,7 +16,7 @@ public class Ticket2 {
     private String lastName;
     private Screening screening;
     private List<String> seating = new ArrayList<>();
-    private static String[] test2;
+    private static String[] stringArray;
     private static List<Ticket2> tickets = new ArrayList<>();
     
     public Ticket2(Movie movie, Screening screening, int seats, boolean exists) throws IOException {
@@ -75,15 +75,15 @@ public class Ticket2 {
 
             while (cinema.hasNext()) {
                 String string = cinema.next();
-                test2 = string.split(";");
+                stringArray = string.split(";");
 
-                if (test2.length > 2) { // required to prevent out of bounds error on Array 
-                    Movie movie = Movie.getMovie(test2[0]);
+                if (stringArray.length > 2) { // required to prevent out of bounds error on Array 
+                    Movie movie = Movie.getMovie(stringArray[0]);
                     System.out.println(movie.getTitle());
-                    List<String> seats = new ArrayList<>(Arrays.asList(test2[2].split(",")));
+                    List<String> seats = new ArrayList<>(Arrays.asList(stringArray[2].split(",")));
                     System.out.println(seats.size());
-                    System.out.println(Screening.findScreening(movie, test2[1]));
-                    new Ticket2(movie, Screening.findScreening(movie, test2[1]), seats.size(), true);
+                    System.out.println(Screening.findScreening(movie, stringArray[1]));
+                    new Ticket2(movie, Screening.findScreening(movie, stringArray[1]), seats.size(), true);
                 }
             }
             cinema.close();

@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Cinema {
 
-    private static String[] test2;
+    private static String[] stringArray;
 
     public static void Go() throws FileNotFoundException { // reads .txt file to create objects
         try {
@@ -15,8 +15,8 @@ public class Cinema {
 
             while (cinema.hasNext()) {
                String string = cinema.next();
-               test2 = string.split(";");
-               createObjects(test2);
+               stringArray = string.split(";");
+               createObjects(stringArray);
             }
             cinema.close();
         } catch (Exception e) { e.printStackTrace(); }
@@ -51,7 +51,7 @@ public class Cinema {
     }
 
     public static boolean check(String cont) { // checks type of object to be created
-        if (test2[0].contains(cont)) return true;
+        if (stringArray[0].contains(cont)) return true;
         else return false;
     }
 }
