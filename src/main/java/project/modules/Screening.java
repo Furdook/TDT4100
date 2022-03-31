@@ -10,15 +10,13 @@ public class Screening { // Remember to remove screening when theatre is full !!
     private List<String> temp = new ArrayList<>();
     private String time;
     private Movie movie;
-    private Theatre theatre;
-
+  
     public Screening(Movie movie, int start, Theatre theatre) {
         this.seating = theatre.getSeatList();
 
         theatre.setTaken(start, movie.getLength());
         setTime(start, movie.getLength());
 
-        this.theatre = theatre;
         this.movie = movie;
 
         movie.setScreenings(this); 
@@ -55,10 +53,6 @@ public class Screening { // Remember to remove screening when theatre is full !!
 
     public Movie getMovie() {
         return this.movie;
-    }
-
-    public Theatre getTheatre() {
-        return this.theatre;
     }
 
     public String getTime() {

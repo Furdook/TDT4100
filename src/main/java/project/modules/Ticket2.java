@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class Ticket2 {
     private String movie;
-    private String firstName;
-    private String lastName;
     private Screening screening;
     private List<String> seating = new ArrayList<>();
     private static String[] stringArray;
@@ -50,10 +48,6 @@ public class Ticket2 {
     public void setSeating(int a) {
         if (this.screening.getSeats().size() > a) this.seating = this.screening.setSeats(a);
         else throw new IllegalArgumentException("Cannot get more seats than there available");
-    }
-
-    public String getName() {
-        return this.firstName + " " + this.lastName;
     }
 
     public String getScreening() {
