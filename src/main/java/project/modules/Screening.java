@@ -8,6 +8,7 @@ import java.util.Optional;
 public class Screening { // Remember to remove screening when theatre is full !!!
     private List<String> seating = new ArrayList<>();
     private List<String> temp = new ArrayList<>();
+    private String theatre;
     private String time;
     private Movie movie;
   
@@ -18,6 +19,7 @@ public class Screening { // Remember to remove screening when theatre is full !!
         setTime(start, movie.getLength());
 
         this.movie = movie;
+        this.theatre = theatre.getName();
 
         movie.setScreenings(this); 
     }
@@ -57,6 +59,10 @@ public class Screening { // Remember to remove screening when theatre is full !!
 
     public String getTime() {
         return this.time;
+    }
+
+    public String getTheatre() {
+        return this.theatre;
     }
 
     @Override

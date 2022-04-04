@@ -18,7 +18,6 @@ public class MovieTest {
             new Movie("Ex Machina", 0);
         });
         Assertions.assertEquals("The Imitation Game", test.getTitle());
-        //Assertions.assertEquals("English", test.getLanguage());
         Assertions.assertEquals(8, test.getLength());
     }
 }
