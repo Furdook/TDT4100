@@ -16,12 +16,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import project.modules.Movie;
 import project.modules.Screening;
-import project.modules.Ticket2;
+import project.modules.Tickets;
 
 public class Controller implements Initializable {
 
     @FXML
-    private Button screening1, screening2, screening3, screening4, film1, film2, film3, film4, Ticket;
+    private Button screening1, screening2, screening3, screening4, film1, film2, film3, film4, ticketBtn;
 
     @FXML
     private Text title;
@@ -30,7 +30,7 @@ public class Controller implements Initializable {
     private TextArea ticketText;
 
     @FXML
-    private TextField textInput;
+    private TextField textInput, nameInput;
 
     // For the variable user interface 
     @FXML
@@ -38,6 +38,9 @@ public class Controller implements Initializable {
 
     @FXML
     private static Integer inti; // number of seats from seating.fxml
+
+    @FXML 
+    private static String name;
 
     @FXML
     private void swapPage(ActionEvent e) throws IOException {
@@ -80,10 +83,7 @@ public class Controller implements Initializable {
                 List<Button> btns2 = Arrays.asList(screening1, screening2, screening3, screening4);
                 
                 int j = 0;
-                for (Button button : btns2) { // check if ticket already exists for each screening
-                    if (!Ticket2.checkTicket(screenings.get(j).toString(), movie))
-                        button.setDisable(true);
-                    
+                for (Button button : btns2) {
                     button.setText(screenings.get(j).toString());
                     j++;
                 }
@@ -92,44 +92,58 @@ public class Controller implements Initializable {
 
             case "Seating":
                 title.setText(movie);
-                textInput.setOnAction(new EventHandler<ActionEvent>() { // on Enter pressed
+
+                nameInput.setOnAction(new EventHandler<ActionEvent>() { // on Enter pressed
 
                     @Override
                     public void handle(ActionEvent arg0) {
                         try {
                             if (!Double.isNaN(Integer.parseInt(textInput.getText()))) { // check if value is a number
                                 if (getScreening().getSeats().size() > Integer.parseInt(textInput.getText())) { // check if there are enough seats
-                                    Ticket.setDisable(false); // enables ticket page if it's feasible 
-                                    inti = Integer.parseInt(textInput.getText());
-                                    Ticket.setText("See ticket");
+                                    if (nameInput.getText().equals("")) { ticketBtn.setText("You need a name"); }
+                                    else {
+                                        inti = Integer.parseInt(textInput.getText());
+                                        name = nameInput.getText().toString();
+                                        
+                                        if (Tickets.checkTicket(screening, movie, name))
+                                        {
+                                            ticketBtn.setText("See ticket");
+                                            ticketBtn.setDisable(false);
+                                        }
+                                        else {
+                                            ticketBtn.setText("You already have a ticket to this screening");
+                                            ticketBtn.setDisable(true);
+                                        }
+                                    }
                                 }
                                 else {
-                                    Ticket.setText("Not enough available seats");
-                                    Ticket.setDisable(true);
+                                    ticketBtn.setText("Not enough available seats");
+                                    ticketBtn.setDisable(true);
                                 }
                             }
                         }
-                        catch (Exception e) { Ticket.setDisable(true); }
+                        catch (Exception e) { ticketBtn.setDisable(true); }
                     }
                 });
                 break;
 
-            case "Ticket":
+            case "ticketBtn":
                 if (!lastPage.equals("Movies")) {  // only create a new ticket if a new one is made, cheeky
                      try {
-                        new Ticket2(Movie.getMovie(movie), getScreening(), inti, false);
+                        new Tickets(Movie.getMovie(movie), getScreening(), inti, false, name);
+                        System.out.println(name);
                     } catch (IOException e) { e.printStackTrace(); }
                 }
-                ticketText.setText(Ticket2.getTickets().toString());
+                ticketText.setText(Tickets.getTickets().toString());
                 break;
         }
     }
 
     private Screening getScreening() { // cleaner 
         return Movie.getMovie(movie).getScreenings()
-                            .get(Integer
-                            .parseInt(screeningButton
-                            .split("(?<=\\D)(?=\\d)")[1]
-                            .toString())-1);
+                    .get(Integer
+                    .parseInt(screeningButton
+                    .split("(?<=\\D)(?=\\d)")[1]
+                    .toString())-1);
     }
 }
