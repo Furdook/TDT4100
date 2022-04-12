@@ -10,7 +10,7 @@ public class Cinema {
 
     public static void Go() throws FileNotFoundException { // reads .txt file to create objects
         try {
-            Scanner cinema = new Scanner(new File("/Users/tai/Desktop/TDT4100-Project/src/main/resources/textfiles/cinema.txt"));
+            Scanner cinema = new Scanner(new File("src/main/resources/textfiles/cinema.txt"));
             cinema.useDelimiter("\n");
 
             while (cinema.hasNext()) {
@@ -20,7 +20,7 @@ public class Cinema {
             }
             cinema.close();
         } catch (Exception e) { e.printStackTrace(); }
-        Ticket2.loadTickets();
+        Tickets.loadTickets();
     }
 
     public static void createObjects(String[] string) { // creates objects used in app

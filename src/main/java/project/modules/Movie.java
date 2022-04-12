@@ -21,13 +21,11 @@ public class Movie {
     }
 
     public static Movie getMovie(String input) {
-        try {
+        try { // Finds movie based on its title
             Optional<Movie> tmp = movies.stream().filter(p -> p.getTitle().equals(input)).findFirst();
             Movie test = tmp.get();
             return test;
-        } catch (Exception e) {
-            return null;   
-        }
+        } catch (Exception e) { return null; }
     }
 
     public static List<Movie> getMovies() {

@@ -18,6 +18,6 @@
       <Button fx:id="film2" layoutX="205.0" layoutY="100.0" mnemonicParsing="false" onAction="#pickMovie" style="-fx-pref-width: 175; -fx-pref-height: 265;"/>
       <Button fx:id="film3" layoutX="20.0" layoutY="375.0" mnemonicParsing="false" onAction="#pickMovie" style="-fx-pref-width: 175; -fx-pref-height: 265;"/>
       <Button fx:id="film4" layoutX="205.0" layoutY="375.0" mnemonicParsing="false" onAction="#pickMovie" style="-fx-pref-width: 175; -fx-pref-height: 265;"/>
-      <Button fx:id="Ticket" graphicTextGap="20.0" layoutX="20.0" layoutY="675.0" mnemonicParsing="false" onAction="#swapPage" style="-fx-pref-height: 100; -fx-pref-width: 360;" text="See ticket" textAlignment="CENTER" />
+      <Button fx:id="ticketBtn" graphicTextGap="20.0" layoutX="20.0" layoutY="675.0" mnemonicParsing="false" onAction="#swapPage" style="-fx-pref-height: 100; -fx-pref-width: 360;" text="See ticket" textAlignment="CENTER" />
    </children>
 </Pane>

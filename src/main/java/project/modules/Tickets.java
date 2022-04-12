@@ -10,24 +10,26 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Ticket2 {
+public class Tickets {
     private String movie;
+    private String name;
     private Screening screening;
     private List<String> seating = new ArrayList<>();
     private static String[] stringArray;
-    private static List<Ticket2> tickets = new ArrayList<>();
+    private static List<Tickets> tickets = new ArrayList<>();
     
-    public Ticket2(Movie movie, Screening screening, int seats, boolean exists) throws IOException {
-        if (checkTicket(screening.toString(), movie.getTitle())) {
+    public Tickets(Movie movie, Screening screening, int seats, boolean exists, String name) throws IOException {
+        if (checkTicket(screening.toString(), movie.getTitle(), name)) {
 
             setScreening(screening);
             setSeating(seats);
+            this.name = name;
             this.movie = movie.getTitle();
             
             if(!exists) {
-                try (BufferedWriter txt = new BufferedWriter(new FileWriter("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt", true))) {
-                    txt.write(movie.getTitle()+";"+screening.getTime()+";"+getSeats()+"/");
-               } catch (FileNotFoundException e) { e.printStackTrace(); }
+                try (BufferedWriter txt = new BufferedWriter(new FileWriter("src/main/resources/textfiles/tickets.txt", true))) {
+                    txt.write(movie.getTitle()+";"+screening.getTime()+";"+getSeats()+";"+name+"/");
+                } catch (FileNotFoundException e) { e.printStackTrace(); }
             }
 
             tickets.add(this);
@@ -35,8 +37,8 @@ public class Ticket2 {
         else throw new IllegalArgumentException("Ticket already exists");
     }
 
-    public static Boolean checkTicket(String input, String movie) {
-        if (!tickets.stream().anyMatch(p -> p.getScreening().equals(input) && p.getMovie().equals(movie))) return true;
+    public static Boolean checkTicket(String input, String movie, String name) {
+        if (!tickets.stream().anyMatch(p -> p.getScreening().equals(input) && p.getMovie().equals(movie) && p.name.equals(name))) return true;
         else return false;
     }
 
@@ -62,9 +64,9 @@ public class Ticket2 {
         return this.seating;
     }
 
-    public static void loadTickets() {
+    public static void loadTickets() throws FileNotFoundException {
         try {
-            Scanner cinema = new Scanner(new File("/Users/tai/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt"));
+            Scanner cinema = new Scanner(new File("src/main/resources/textfiles/tickets.txt"));
             cinema.useDelimiter("/");
 
             while (cinema.hasNext()) {
@@ -74,20 +76,20 @@ public class Ticket2 {
                 if (stringArray.length > 2) { // required to prevent out of bounds error on Array 
                     Movie movie = Movie.getMovie(stringArray[0]);
                     List<String> seats = new ArrayList<>(Arrays.asList(stringArray[2].split(",")));
-                    new Ticket2(movie, Screening.findScreening(movie, stringArray[1]), seats.size(), true);
+                    new Tickets(movie, Screening.findScreening(movie, stringArray[1]), seats.size(), true, stringArray[3]);
                 }
             }
             cinema.close();
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    public static List<Ticket2> getTickets() {
+    public static List<Tickets> getTickets() {
         return tickets;
     }
 
     @Override
     public String toString() { // a mess
-        String tmp = (this.screening.getMovie().getTitle() + "\n" + this.screening.getTheatre() + ": " + getScreening() + "\n" + getSeats() + "\n\n").replaceAll("\\[", "").replaceAll("\\]", "");
+        String tmp = (this.name + ": " +this.screening.getMovie().getTitle() + "\n" + this.screening.getTheatre() + ": " + getScreening() + "\n" + getSeats() + "\n\n").replaceAll("\\[", "").replaceAll("\\]", "");
         return tmp.replaceAll("\\]", "").replaceAll("\\[", "");
     }
 }
