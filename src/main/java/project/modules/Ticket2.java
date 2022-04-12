@@ -64,7 +64,7 @@ public class Ticket2 {
 
     public static void loadTickets() {
         try {
-            Scanner cinema = new Scanner(new File("/Users/timonselnes/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt"));
+            Scanner cinema = new Scanner(new File("/Users/tai/Desktop/TDT4100-Project/src/main/resources/textfiles/tickets.txt"));
             cinema.useDelimiter("/");
 
             while (cinema.hasNext()) {
