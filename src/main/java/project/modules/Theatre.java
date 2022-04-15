@@ -39,9 +39,8 @@ public class Theatre {
     public void setTaken(int start, int length) {
         if (start < 0) throw new IllegalArgumentException("The movie can not start before opening time");
 
-        if (getAvailability(start, length)) { // Removes time slots from the time List in 15 minute increments
+        if (getAvailability(start, length))  // Removes time slots from the time List in 15 minute increments
             this.time.subList(this.time.indexOf(start), this.time.indexOf(start+length)).clear();
-        } 
         else throw new IllegalArgumentException("Theatre is not available");
     }
 

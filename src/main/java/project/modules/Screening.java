@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-public class Screening { // Remember to remove screening when theatre is full !!!
+public class Screening { 
     private List<String> seating = new ArrayList<>();
     private List<String> temp = new ArrayList<>();
     private String theatre;
@@ -37,6 +37,7 @@ public class Screening { // Remember to remove screening when theatre is full !!
         this.time = String.format("%d:%02d", hour, min) + " - " + String.format("%d:%02d", hour2, min2);
     }
 
+    // find screening based on which film and what time as a string ie. '17:00-19:30'
     public static Screening findScreening(Movie movie, String screening) throws NoSuchElementException {
         Optional<Screening> tmp = movie.getScreenings().stream().filter(p -> p.toString().equals(screening)).findFirst();
         Screening temp = tmp.get();
