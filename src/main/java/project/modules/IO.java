@@ -26,9 +26,8 @@ public class IO implements IIO { // Input/Output
         try {
             Scanner cinema = new Scanner(new File(filePath));
 
-            if (type.equals("Ticket")) //What delimetre to use depending on which file
-                cinema.useDelimiter("/");
-            else cinema.useDelimiter("\n");
+            //Chooses delimiter depending on which file due to different formatting
+            cinema.useDelimiter(type.equals("Ticket") ? "/" : "\n");
 
             while (cinema.hasNext()) {
                 String string = cinema.next();
@@ -39,7 +38,7 @@ public class IO implements IIO { // Input/Output
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    @Override // creates objects for each line in cinema.txt
+    @Override // creates objects for each line in cinema.txt and existing tickets
     public void createObject(String[] i) throws NoSuchElementException, IOException {
         switch (i[0].replaceAll("\\d", "")) {
             case "theatre":

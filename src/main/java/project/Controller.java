@@ -139,7 +139,7 @@ public class Controller implements Initializable {
         }
     }
 
-    private Screening getScreening() { // cleaner 
+    private Screening getScreening() { // used twice in Controller
         return Movie.getMovie(movie).getScreenings()
                     .get(Integer
                     .parseInt(screeningButton

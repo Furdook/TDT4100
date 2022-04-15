@@ -19,14 +19,15 @@ public class Tickets {
             this.name = name;
             this.movie = movie.getTitle();
 
-            if (!exist)
-                IO.callMe(movie.getTitle()+";"+screening.getTime()+";"+getSeats()+";"+name+"/");
+            if (!exist) // For existing tickets in tickets.txt on startup
+                IO.callMe(this.movie+";"+screening.getTime()+";"+getSeats()+";"+name+"/");
 
             tickets.add(this);
         }
         else throw new IllegalArgumentException("Ticket already exists");
     }
 
+    // Checks if ticket already exists in tickets array
     public static Boolean checkTicket(String input, String movie, String name) {
         if (!tickets.stream().anyMatch(p -> p.getScreening().equals(input) && p.getMovie().equals(movie) && p.name.equals(name))) return true;
         else return false;
