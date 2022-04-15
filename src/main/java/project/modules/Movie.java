@@ -11,7 +11,7 @@ public class Movie {
     private static List<Movie> movies = new ArrayList<>();
 
     public Movie(String title, int length) {
-        if (title != null && !title.equals("")) this.title = title;
+        if (!title.equals("")) this.title = title;
         else throw new IllegalArgumentException("Title can not be null");
 
         if (length > 0) this.length = length;
@@ -23,8 +23,7 @@ public class Movie {
     public static Movie getMovie(String input) {
         try { // Finds movie based on its title
             Optional<Movie> tmp = movies.stream().filter(p -> p.getTitle().equals(input)).findFirst();
-            Movie test = tmp.get();
-            return test;
+            return tmp.get();
         } catch (Exception e) { return null; }
     }
 

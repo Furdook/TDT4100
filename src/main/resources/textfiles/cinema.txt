@@ -6,19 +6,19 @@ movie1;The Imitation Game;English;8
 movie2;Snowden;English;9
 movie3;Ex Machina;English;8
 movie4;I, Robot;English;8
-screening1;movie1;0;Sal 1
-screening2;movie1;35;Sal 2
-screening3;movie1;20;Sal 3
-screening4;movie1;15;Sal 4
-screening5;movie2;10;Sal 1
-screening6;movie2;0;Sal 2
-screening7;movie2;35;Sal 3
-screening8;movie2;30;Sal 4
-screening9;movie3;20;Sal 1
-screening10;movie3;10;Sal 2
-screening11;movie3;0;Sal 3
-screening12;movie3;40;Sal 4
-screening13;movie4;40;Sal 1
-screening14;movie4;25;Sal 2
-screening15;movie4;10;Sal 3
-screening16;movie4;0;Sal 4
+screening1;The Imitation Game;0;Sal 1
+screening2;The Imitation Game;35;Sal 2
+screening3;The Imitation Game;20;Sal 3
+screening4;The Imitation Game;15;Sal 4
+screening5;Snowden;10;Sal 1
+screening6;Snowden;0;Sal 2
+screening7;Snowden;35;Sal 3
+screening8;Snowden;30;Sal 4
+screening9;Ex Machina;20;Sal 1
+screening10;Ex Machina;10;Sal 2
+screening11;Ex Machina;0;Sal 3
+screening12;Ex Machina;40;Sal 4
+screening13;I, Robot;40;Sal 1
+screening14;I, Robot;25;Sal 2
+screening15;I, Robot;10;Sal 3
+screening16;I, Robot;0;Sal 4

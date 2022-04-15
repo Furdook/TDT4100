@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import project.modules.Cinema;
+import project.modules.IO;
 
 import java.io.IOException;
 
@@ -16,8 +16,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Cinema.Go(); // Runs to create objects used in app
-
+        IO.callMe("Other", "src/main/resources/textfiles/cinema.txt");
+        IO.callMe("Ticket", "src/main/resources/textfiles/tickets.txt");
+        
         scene = new Scene(loadFXML("Movies"));
 
         stage.setScene(scene);

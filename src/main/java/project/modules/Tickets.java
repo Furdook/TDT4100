@@ -1,36 +1,26 @@
 package project.modules;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class Tickets {
     private String movie;
     private String name;
     private Screening screening;
     private List<String> seating = new ArrayList<>();
-    private static String[] stringArray;
     private static List<Tickets> tickets = new ArrayList<>();
     
-    public Tickets(Movie movie, Screening screening, int seats, boolean exists, String name) throws IOException {
+    public Tickets(Movie movie, Screening screening, int seats, boolean exist, String name) throws IOException {
         if (checkTicket(screening.toString(), movie.getTitle(), name)) {
 
             setScreening(screening);
             setSeating(seats);
             this.name = name;
             this.movie = movie.getTitle();
-            
-            if(!exists) {
-                try (BufferedWriter txt = new BufferedWriter(new FileWriter("src/main/resources/textfiles/tickets.txt", true))) {
-                    txt.write(movie.getTitle()+";"+screening.getTime()+";"+getSeats()+";"+name+"/");
-                } catch (FileNotFoundException e) { e.printStackTrace(); }
-            }
+
+            if (!exist)
+                IO.callMe(movie.getTitle()+";"+screening.getTime()+";"+getSeats()+";"+name+"/");
 
             tickets.add(this);
         }
@@ -62,25 +52,6 @@ public class Tickets {
 
     public List<String> getSeats() {
         return this.seating;
-    }
-
-    public static void loadTickets() throws FileNotFoundException {
-        try {
-            Scanner cinema = new Scanner(new File("src/main/resources/textfiles/tickets.txt"));
-            cinema.useDelimiter("/");
-
-            while (cinema.hasNext()) {
-                String string = cinema.next();
-                stringArray = string.split(";");
-
-                if (stringArray.length > 2) { // required to prevent out of bounds error on Array 
-                    Movie movie = Movie.getMovie(stringArray[0]);
-                    List<String> seats = new ArrayList<>(Arrays.asList(stringArray[2].split(",")));
-                    new Tickets(movie, Screening.findScreening(movie, stringArray[1]), seats.size(), true, stringArray[3]);
-                }
-            }
-            cinema.close();
-        } catch (Exception e) { e.printStackTrace(); }
     }
 
     public static List<Tickets> getTickets() {

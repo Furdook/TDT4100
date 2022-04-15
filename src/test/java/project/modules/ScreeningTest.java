@@ -20,4 +20,9 @@ public class ScreeningTest {
             new Screening(movie, -1, theatre);
         });
     }
+
+    @Test
+    public void testMethods() {
+        Assertions.assertEquals(test, Screening.findScreening(movie, ""));
+    }
 }

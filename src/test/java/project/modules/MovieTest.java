@@ -17,8 +17,16 @@ public class MovieTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Movie("Ex Machina", 0);
         });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            new Movie("", 3);
+        });
         Assertions.assertEquals("The Imitation Game", test.getTitle());
         Assertions.assertEquals(8, test.getLength());
+    }
+
+    @Test
+    public void testMethods() {
+        Assertions.assertEquals(test, Movie.getMovie("The Imitation Game"));
     }
 }
 
