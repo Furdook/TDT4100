@@ -71,7 +71,7 @@ public class Controller implements Initializable {
                 List<Movie> movies = Movie.getMovies();
                 List<Button> btns = Arrays.asList(film1, film2, film3, film4);
 
-                int i = 0;
+                int i = 0; // set the movies based on created objects
                 for (Button button : btns) {
                     button.setText(movies.get(i).getTitle());
                     i++;
@@ -82,7 +82,7 @@ public class Controller implements Initializable {
                 List<Screening> screenings = Movie.getMovie(movie).getScreenings();
                 List<Button> btns2 = Arrays.asList(screening1, screening2, screening3, screening4);
                 
-                int j = 0;
+                int j = 0; // set the correct text for which screenings belong to chosen movie
                 for (Button button : btns2) {
                     button.setText(screenings.get(j).toString());
                     j++;
@@ -97,11 +97,11 @@ public class Controller implements Initializable {
 
                     @Override
                     public void handle(ActionEvent arg0) {
-                        try {
+                        try { // For user to pick number of seats and pick their name
                             if (!Double.isNaN(Integer.parseInt(textInput.getText()))) { // check if value is a number
                                 if (getScreening().getSeats().size() > Integer.parseInt(textInput.getText())) { // check if there are enough seats
                                     if (nameInput.getText().equals("")) { ticketBtn.setText("You need a name"); }
-                                    else {
+                                    else { 
                                         inti = Integer.parseInt(textInput.getText());
                                         name = nameInput.getText().toString();
                                         
@@ -127,11 +127,10 @@ public class Controller implements Initializable {
                 });
                 break;
 
-            case "ticketBtn":
-                if (!lastPage.equals("Movies")) {  // only create a new ticket if a new one is made, cheeky
+            case "ticketBtn": 
+                if (!lastPage.equals("Movies")) {  // only create a new ticket if a new one is made
                      try {
                         new Tickets(Movie.getMovie(movie), getScreening(), inti, false, name);
-                        System.out.println(name);
                     } catch (IOException e) { e.printStackTrace(); }
                 }
                 ticketText.setText(Tickets.getTickets().toString());
@@ -139,7 +138,7 @@ public class Controller implements Initializable {
         }
     }
 
-    private Screening getScreening() { // used twice in Controller
+    private Screening getScreening() { // used twice in Controller, could've been placed in Screening.java
         return Movie.getMovie(movie).getScreenings()
                     .get(Integer
                     .parseInt(screeningButton
