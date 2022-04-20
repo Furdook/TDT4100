@@ -15,6 +15,7 @@ public class IO implements IIO { // Input/Output
     private static String[] stringArray;
     private static IO tmp = new IO();
 
+    //Takes in 1 or 2 Strings one being the filePath the other being what type ie. write to tickets or read
     public static void callMe(String...input) throws IOException{
         if (input.length < 2)
             tmp.writeToFile(input[0]);
