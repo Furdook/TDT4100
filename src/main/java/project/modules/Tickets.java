@@ -33,12 +33,12 @@ public class Tickets {
         else return false;
     }
 
-    public void setScreening(Screening screening) {
+    private void setScreening(Screening screening) {
         if (screening != null) this.screening = screening;
         else throw new IllegalArgumentException("Screening can not be null");
     }
 
-    public void setSeating(int a) {
+    private void setSeating(int a) {
         if (this.screening.getSeats().size() > a) this.seating = this.screening.setSeats(a);
         else throw new IllegalArgumentException("Cannot get more seats than there available");
     }

@@ -12,7 +12,7 @@ public class Theatre {
     private final char[] seatChar = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'};
 
     public Theatre(String name, int size) {
-        if (name != null) this.theatreName = name;
+        if (!name.equals("")) this.theatreName = name;
         else throw new IllegalArgumentException("Theatre name can not be null");
 
         if (size > 0 && size <= 110) { // Adds the set amount of seats to current theatre max 110
