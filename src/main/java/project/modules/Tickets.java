@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tickets {
-    private String movie;
+    private Movie movie;
     private String name;
     private Screening screening;
     private List<String> seating = new ArrayList<>();
@@ -17,7 +17,7 @@ public class Tickets {
             setScreening(screening);
             setSeating(seats);
             this.name = name;
-            this.movie = movie.getTitle();
+            this.movie = movie;
 
             if (!exist) // For existing tickets in tickets.txt on startup
                 IO.callMe(this.movie+";"+screening.getTime()+";"+getSeats()+";"+name+"/");
@@ -48,7 +48,7 @@ public class Tickets {
     }
 
     private String getMovie() {
-        return this.movie.toString();
+        return this.movie.getTitle();
     }
 
     public List<String> getSeats() {
@@ -61,7 +61,6 @@ public class Tickets {
 
     @Override
     public String toString() { // a mess
-        String tmp = (this.name + ": " +this.screening.getMovie().getTitle() + "\n" + this.screening.getTheatre() + ": " + getScreening() + "\n" + getSeats() + "\n\n").replaceAll("\\[", "").replaceAll("\\]", "");
-        return tmp.replaceAll("\\]", "").replaceAll("\\[", "");
+        return (this.name + ": " +this.screening.getMovie().getTitle() + "\n" + this.screening.getTheatre() + ": " + getScreening() + "\n" + getSeats() + "\n\n").replaceAll("\\[", "").replaceAll("\\]", "");
     }
 }

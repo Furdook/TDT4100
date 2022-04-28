@@ -24,6 +24,7 @@ public class ScreeningTest {
     
     @Test
     public void testConstructor() {
+        // Sjekker at ikke screenings som starter før åpning kan godkjennes
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new Screening(movie, -1, theatre);
         });
@@ -31,13 +32,15 @@ public class ScreeningTest {
 
     @Test
     public void testMethods() {
+        // testing av metodene for å finne screenings
         Assertions.assertEquals(test, Screening.findScreening(movie, "12:00 - 14:00"));
         Assertions.assertEquals(test2, Screening.findScreening(movie2, "14:30 - 16:30"));
        
+        // Sjekker at screenings 'mister' plasser når de blir 'kjøpt'
         test.setSeats(3);
         Assertions.assertEquals(47, test.getSeats().size());
         Assertions.assertEquals(movie, test.getMovie());
-
+        // Sjekker at dette ikke endrer på andre screenings
         Assertions.assertEquals(50, test2.getSeats().size());
     }
 }

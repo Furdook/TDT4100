@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public class Screening { 
     private List<String> seating = new ArrayList<>();
-    private List<String> temp = new ArrayList<>();
-    private String theatre;
+   // private List<String> temp = new ArrayList<>();
+    private Theatre theatre;
     private String time;
     private Movie movie;
   
@@ -19,7 +19,7 @@ public class Screening {
         setTime(start, movie.getLength());
 
         this.movie = movie;
-        this.theatre = theatre.getName();
+        this.theatre = theatre;
 
         movie.setScreenings(this); 
     }
@@ -41,13 +41,14 @@ public class Screening {
     public static Screening findScreening(Movie movie, String screening) throws NoSuchElementException {
         Optional<Screening> tmp = movie.getScreenings().stream().filter(p -> p.toString().equals(screening)).findFirst();
         Screening temp = tmp.get();
-        return temp;
+        return temp; // move temp to method
     }
 
     public List<String> setSeats(int a) {
-        this.temp.addAll(this.seating.subList(0, a));
+        List<String> temp = new ArrayList<>();
+        temp.addAll(this.seating.subList(0, a));
         this.seating.subList(0, a).clear();
-        return this.temp;
+        return temp;
     }
 
     public List<String> getSeats() { 
@@ -63,7 +64,7 @@ public class Screening {
     }
 
     public String getTheatre() {
-        return this.theatre;
+        return this.theatre.getName();
     }
 
     @Override

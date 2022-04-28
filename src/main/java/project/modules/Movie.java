@@ -35,7 +35,7 @@ public class Movie {
         return this.title;
     }
 
-    public int getLength() {
+    public int getLength() { // Not needed for the program, but used in tests to check correct length
         return this.length;
     }
 
