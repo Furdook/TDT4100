@@ -1,5 +1,9 @@
 package project.modules;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,8 +43,16 @@ public class ScreeningTest {
         // Sjekker at screenings 'mister' plasser når de blir 'kjøpt'
         test.setSeats(3);
         Assertions.assertEquals(47, test.getSeats().size());
+        // checks that the corrects seats are taken in setTaken
+        List<String> tmp = new ArrayList<>(Arrays.asList("A-4", "A-5"));
+        Assertions.assertEquals(tmp, test.setSeats(2));
+        // checks that getMovie return correctly
         Assertions.assertEquals(movie, test.getMovie());
         // Sjekker at dette ikke endrer på andre screenings
         Assertions.assertEquals(50, test2.getSeats().size());
+        // checks getTime
+        Assertions.assertEquals("12:00 - 14:00", test.getTime());
+        // checks getTheatre returns correctly
+        Assertions.assertEquals("Test", test.getTheatre());
     }
 }
