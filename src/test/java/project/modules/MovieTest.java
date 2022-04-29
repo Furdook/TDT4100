@@ -14,7 +14,7 @@ public class MovieTest {
 
     @BeforeEach
     public void setup() {
-        test = new Movie("The Imitation Game", 8);
+        test = new Movie("Shawshank", 8);
         test2 = new Movie("Ex, Machina", 20);
         screening = new Screening(test, 1, new Theatre("Bah", 50));
     }
@@ -34,11 +34,11 @@ public class MovieTest {
     @Test
     public void testMethods() {
         // Sjekker at getTitle() returnerer riktig tittel
-        Assertions.assertEquals("The Imitation Game", test.getTitle());
+        Assertions.assertEquals("Shawshank", test.getTitle());
         // Sjekker at lengde stemmer
         Assertions.assertEquals(8, test.getLength());
         // Sjekker at getMovie() klarer å finne en gitt film i programmet
-        Assertions.assertEquals(test, Movie.getMovie("The Imitation Game"));
+        Assertions.assertEquals(test, Movie.getMovie("Shawshank"));
         // Sjekker at den også klarer å finne andre titler
         Assertions.assertEquals(test2, Movie.getMovie("Ex, Machina"));
         // Sjekker at getter for screenings tilhørende filmen fungerer

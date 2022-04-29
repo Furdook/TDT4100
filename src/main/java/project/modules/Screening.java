@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public class Screening { 
     private List<String> seating = new ArrayList<>();
-   // private List<String> temp = new ArrayList<>();
     private Theatre theatre;
     private String time;
     private Movie movie;
@@ -24,7 +23,7 @@ public class Screening {
         movie.setScreenings(this); 
     }
 
-    public void setTime(int start, int length) { // surely a better way to do this
+    public void setTime(int start, int length) { // surely a better way to do this built in Date?
         start *= 15;
         int hour = (start/60)+12;
         int min = start%60;
@@ -41,7 +40,7 @@ public class Screening {
     public static Screening findScreening(Movie movie, String screening) throws NoSuchElementException {
         Optional<Screening> tmp = movie.getScreenings().stream().filter(p -> p.toString().equals(screening)).findFirst();
         Screening temp = tmp.get();
-        return temp; // move temp to method
+        return temp; 
     }
 
     public List<String> setSeats(int a) {

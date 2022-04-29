@@ -44,7 +44,7 @@ public class Theatre {
         else throw new IllegalArgumentException("Theatre is not available");
     }
 
-    private boolean getAvailability(int start, int length) { // Cheacks if timeslots are taken
+    public boolean getAvailability(int start, int length) { // Cheacks if timeslots are taken
         if (this.time.contains(start) && this.time.contains(start+length)) return true;
         else return false;
     }

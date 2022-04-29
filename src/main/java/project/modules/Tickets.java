@@ -14,13 +14,16 @@ public class Tickets {
     public Tickets(Movie movie, Screening screening, int seats, boolean exist, String name) throws IOException {
         if (checkTicket(screening.toString(), movie.getTitle(), name)) {
 
-            setScreening(screening);
-            setSeating(seats);
+            /* Null errors and wrong int prevented in Controller!
+            'if not -> throw' causes dead code errors 
+            will throw null error if neccesary */
+            this.screening = screening;
+            this.seating = this.screening.setSeats(seats);
             this.name = name;
             this.movie = movie;
 
             if (!exist) // For existing tickets in tickets.txt on startup
-                IO.callMe(this.movie+";"+screening.getTime()+";"+getSeats()+";"+name+"/");
+                IO.callMe(this.movie.getTitle()+";"+screening.getTime()+";"+getSeats()+";"+name+"/");
 
             tickets.add(this);
         }
@@ -33,21 +36,11 @@ public class Tickets {
         else return false;
     }
 
-    private void setScreening(Screening screening) {
-        if (screening != null) this.screening = screening;
-        else throw new IllegalArgumentException("Screening can not be null");
-    }
-
-    private void setSeating(int a) {
-        if (this.screening.getSeats().size() > a) this.seating = this.screening.setSeats(a);
-        else throw new IllegalArgumentException("Cannot get more seats than there available");
-    }
-
     public String getScreening() {
         return this.screening.toString();
     }
 
-    private String getMovie() {
+    public String getMovie() {
         return this.movie.getTitle();
     }
 

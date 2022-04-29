@@ -22,7 +22,7 @@ public class Movie {
 
     public static Movie getMovie(String input) {
         try { // Finds movie based on its title
-            Optional<Movie> tmp = movies.stream().filter(p -> p.getTitle().equals(input)).findFirst();
+            Optional<Movie> tmp = movies.stream().filter(p -> p.getTitle().equals(input)).findAny();
             return tmp.get();
         } catch (Exception e) { return null; }
     }
