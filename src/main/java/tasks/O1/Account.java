@@ -1,6 +1,6 @@
 package tasks.O1;
 
-public class Account {
+public class Account { //
     private float balance;
     private float interestRate;
 
